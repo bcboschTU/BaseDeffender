@@ -11,22 +11,20 @@
 #include <GLFW/glfw3.h>
 #include <libpng16/png.h>
 #include <GLUT/glut.h>
-#include <OpenGL/gl.h>
-#include "controls.h"
-#include "glm.hpp"
-#include "matrix_transform.hpp"
 #include <string>
+
+#include "controls.h"
+#include "Level.h"
 
 
 GLFWwindow* window;
 Camera camera;
-int width = 110;
+Level level;
+int width = 1100;
 int height = 700;
 int camPosX = 0;
 int camPosY = 0;
 float camPosZ = 0.1;
-int nearPlane = 0;
-int farPlane = 2;
 
 static void error_callback(int error, const char* description)
 {
@@ -45,17 +43,16 @@ void initGL(int widthR, int heightR)
     glViewport(0, 0, (GLsizei)widthR, (GLsizei)heightR);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-1, 1, -1 * (GLfloat) height / (GLfloat) width, (GLfloat) height/ (GLfloat) width, -1, 1);
+    glOrtho(-1, 1, -1 * (GLfloat) height / (GLfloat) width, (GLfloat) height/ (GLfloat) width, -100, 100);
     // ----- OpenGL settings -----
     glfwSwapInterval(1); 		// Lock to vertical sync of monitor (normally 60Hz, so 60fps)
     
     glEnable(GL_SMOOTH);		// Enable (gouraud) shading
     
-    glDisable(GL_DEPTH_TEST); 	// Disable depth testing
+    glEnable(GL_DEPTH_TEST); 	// Disable depth testing
     
     glEnable(GL_BLEND);		// Enable blending (used for alpha) and blending function to use
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_TEXTURE_2D);
     
     glLineWidth(1.0f);		// Set a 'chunky' line width
     
@@ -66,8 +63,13 @@ void initGL(int widthR, int heightR)
     glEnable(GL_POINT_SMOOTH);
 }
 
+void initGame(){
+    level = Level(0);
+}
+
 void drawLevel(){
-    
+    level.updateLevel();
+    level.drawLevel();
 }
 
 void drawScene(){
@@ -79,13 +81,15 @@ void drawScene(){
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     //double a = width / height;
-    glOrtho(-1, 1, -1 * (GLfloat) height / (GLfloat) width, (GLfloat) height/ (GLfloat) width, -1, 1);
+    glOrtho(-1, 1, -1 * (GLfloat) height / (GLfloat) width, (GLfloat) height/ (GLfloat) width, -100, 100);
+    
+    glScaled(camera.getPosition().z, camera.getPosition().z, 1);
+    glTranslatef(camera.getPosition().x, camera.getPosition().y, 0);
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     
-    glScaled(camera.getPosition().z, camera.getPosition().z, 1);
-    glTranslatef(camera.getPosition().x, camera.getPosition().y, 0);
+    
     
     drawLevel();
     
@@ -114,6 +118,8 @@ int main(void)
         return -1;
     }
     initGL(width,height);
+    
+    initGame();
     
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);

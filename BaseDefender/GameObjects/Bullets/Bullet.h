@@ -11,4 +11,9 @@
 
 #include <stdio.h>
 
+class Bullet{
+public:
+    Bullet();
+};
+
 #endif /* defined(__BaseDefender__Bullet__) */

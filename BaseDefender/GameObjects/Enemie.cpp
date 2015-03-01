@@ -52,7 +52,7 @@ void Enemie::gotHit(std::vector<Bullet*> bullets){
     for (int i = 0; i< bullets.size(); i++) {
         Bullet* bullet = bullets[i];
         float distance = calculateDistance(xPos, bullet->getXPos(), yPos, bullet->getYPos());
-        float hitDistance = width + bullet->getWidth() -width;
+        float hitDistance = width + bullet->getWidth();
         if(distance < hitDistance){
             hp = hp - bullet->getDmg();
             //bullet set on destroyed;

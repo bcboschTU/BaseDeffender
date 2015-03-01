@@ -39,6 +39,7 @@ private:
     WeaponType weaponType;
     float fireRate;
     float range;
+    float lastTime;
 };
 
 

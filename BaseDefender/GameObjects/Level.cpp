@@ -23,14 +23,17 @@ void Level::loadLevel(){
     Player player1 = Player("Player1", 200, 1, 1, 0.2, 0.2, 0, 1);
     players.push_back(player1);
     
-    Base base1 = Base("Base1", 200, 0, 0, 0.4, 0.4, 0, 1);
+    Base base1 = Base("Base1", 500, 0, 0, 0.4, 0.4, 0, 1);
     bases.push_back(base1);
     
-    Turret turret1 = Turret("Turret1Base1", 1000, 0.4, 0.4, 0.15, 0.15, 0, 1);
+    Turret turret1 = Turret("Turret1Base1", 100, 0.4, 0.4, 0.15, 0.15, 0, 1);
     turrets.push_back(turret1);
     
-    Turret turret2 = Turret("Turret2Base1", 1000, -0.4, -0.4, 0.15, 0.15, 0, 1);
+    Turret turret2 = Turret("Turret2Base1", 100, -0.4, -0.4, 0.15, 0.15, 0, 1);
     turrets.push_back(turret2);
+    
+    Turret turret3 = Turret("Turret2Base1", 100, -0.4, 0.4, 0.15, 0.15, 0, 1);
+    turrets.push_back(turret3);
     
     for(int i = 0; i<100; i++){
         float xPos = rand_FloatRange(-5,5);

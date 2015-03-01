@@ -29,6 +29,9 @@ public:
                float _angle,
                int _level);
     virtual void draw();
+    
+    
+    //getters and setters
     std::string getName();
     void setName(std::string _name);
     int getHp();

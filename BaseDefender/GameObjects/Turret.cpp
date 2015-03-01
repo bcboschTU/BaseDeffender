@@ -7,15 +7,6 @@
 //
 
 #include "Turret.h"
-//
-//  Player.cpp
-//  BaseDefender
-//
-//  Created by Bert Bosch on 28-02-15.
-//  Copyright (c) 2015 Bossos. All rights reserved.
-//
-
-#include "Player.h"
 
 Turret::Turret(std::string _name,
                int _hp,
@@ -28,6 +19,7 @@ Turret::Turret(std::string _name,
     weaponType = NORMAL;
     fireRate = 0.05;
     range = 2;
+    lastTime = glfwGetTime();
 }
 
 void Turret::draw(){
@@ -52,9 +44,8 @@ void Turret::updateTurret(){
 }
 
 void Turret::shoot(float dirXPos, float dirYPos){
-    static double lastTimePrimary = glfwGetTime();
-    double currentTime = glfwGetTime();
-    float deltaTime = float(currentTime - lastTimePrimary);
+    float currentTime = glfwGetTime();
+    float deltaTime = float(currentTime - lastTime);
     
     if(deltaTime > fireRate){
         //calculate angle:
@@ -63,12 +54,10 @@ void Turret::shoot(float dirXPos, float dirYPos){
         
         float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
         
-        std::cout<<"angle: " << angle << "\n";
-        
         Bullet bullet = Bullet(getXPos(), getYPos(), angle, weaponType);
         bullets.push_back(bullet);
         
-        lastTimePrimary = currentTime;
+        lastTime = currentTime;
     }
 }
 

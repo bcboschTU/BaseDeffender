@@ -14,8 +14,9 @@
 #include <iostream>
 #include <string>
 #include <GLFW/glfw3.h>
-#include <math.h>
+#include <vector>
 
+#include "Bullet.h"
 
 class GameObject{
 public:
@@ -44,6 +45,7 @@ public:
     void setAngle(float _angle);
     int getLevel();
     void setLevel(int level);
+    
 private:
     std::string name;
     int hp;

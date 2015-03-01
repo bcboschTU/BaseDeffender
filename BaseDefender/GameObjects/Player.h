@@ -9,7 +9,6 @@
 #ifndef __BaseDefender__Player__
 #define __BaseDefender__Player__
 
-#include <stdio.h>
 #include "GameObject.h"
 
 class Player:GameObject{
@@ -24,6 +23,27 @@ public:
            int _level);
     void draw();
     void updatePlayer();
+    void shootPrimary(float dirXPos, float dirYPos);
+    void shootSecondary(float dirXPos, float dirYPos);
+    std::vector<Bullet>* getBullets();
+    float getFireRatePrimary();
+    
+    //getter & setters
+    float getXPos();
+    float getYPos();
+    void setNewPos(float newXPos, float newYPos);
+    
+    //remove bullet
+    void updateBullets();
+    void removeBullet(int index);
+private:
+    std::vector<Bullet> bullets;
+    float fireRatePrimary;
+    float fireRateSecondary;
+    
+    //weapontype
+    WeaponType primaryWeaponType;
+    WeaponType secondaryWeaponType;
 };
 
 #endif /* defined(__BaseDefender__Player__) */

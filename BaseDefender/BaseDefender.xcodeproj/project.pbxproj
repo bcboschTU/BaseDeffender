@@ -20,6 +20,8 @@
 		D3C220C61AA22DE600ABF36D /* Turret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220C41AA22DE600ABF36D /* Turret.cpp */; };
 		D3C220C91AA22DF300ABF36D /* Enemie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220C71AA22DF300ABF36D /* Enemie.cpp */; };
 		D3C220CC1AA22E0300ABF36D /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220CA1AA22E0300ABF36D /* Bullet.cpp */; };
+		D3C220D11AA25E3B00ABF36D /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220CF1AA25E3B00ABF36D /* GameState.cpp */; };
+		D3C220D41AA2702100ABF36D /* Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220D21AA2702100ABF36D /* Base.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -307,6 +309,10 @@
 		D3C220C81AA22DF300ABF36D /* Enemie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemie.h; path = GameObjects/Enemie.h; sourceTree = "<group>"; };
 		D3C220CA1AA22E0300ABF36D /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bullet.cpp; path = GameObjects/Bullets/Bullet.cpp; sourceTree = "<group>"; };
 		D3C220CB1AA22E0300ABF36D /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bullet.h; path = GameObjects/Bullets/Bullet.h; sourceTree = "<group>"; };
+		D3C220CF1AA25E3B00ABF36D /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameState.cpp; path = common/GameState.cpp; sourceTree = "<group>"; };
+		D3C220D01AA25E3B00ABF36D /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameState.h; path = common/GameState.h; sourceTree = "<group>"; };
+		D3C220D21AA2702100ABF36D /* Base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Base.cpp; path = GameObjects/Base.cpp; sourceTree = "<group>"; };
+		D3C220D31AA2702100ABF36D /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base.h; path = GameObjects/Base.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -646,6 +652,8 @@
 				D3C220B71AA22CD500ABF36D /* texture.hpp */,
 				D3C220AB1AA22C5900ABF36D /* controls.cpp */,
 				D3C220AC1AA22C5900ABF36D /* controls.h */,
+				D3C220CF1AA25E3B00ABF36D /* GameState.cpp */,
+				D3C220D01AA25E3B00ABF36D /* GameState.h */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -661,6 +669,8 @@
 				D3C220C21AA22DDA00ABF36D /* Player.h */,
 				D3C220C41AA22DE600ABF36D /* Turret.cpp */,
 				D3C220C51AA22DE600ABF36D /* Turret.h */,
+				D3C220D21AA2702100ABF36D /* Base.cpp */,
+				D3C220D31AA2702100ABF36D /* Base.h */,
 				D3C220BE1AA22DC200ABF36D /* Level.cpp */,
 				D3C220BF1AA22DC200ABF36D /* Level.h */,
 			);
@@ -742,7 +752,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3C220BD1AA22DB600ABF36D /* GameObject.cpp in Sources */,
+				D3C220D11AA25E3B00ABF36D /* GameState.cpp in Sources */,
 				D3C220CC1AA22E0300ABF36D /* Bullet.cpp in Sources */,
+				D3C220D41AA2702100ABF36D /* Base.cpp in Sources */,
 				D3C220C01AA22DC200ABF36D /* Level.cpp in Sources */,
 				D3C220C31AA22DDA00ABF36D /* Player.cpp in Sources */,
 				D3C220C61AA22DE600ABF36D /* Turret.cpp in Sources */,

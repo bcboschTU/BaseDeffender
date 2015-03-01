@@ -15,11 +15,12 @@
 
 #include "controls.h"
 #include "Level.h"
-
+#include "GameState.h"
 
 GLFWwindow* window;
 Camera camera;
 Level level;
+GameState gamestate;
 int width = 1100;
 int height = 700;
 int camPosX = 0;
@@ -49,7 +50,7 @@ void initGL(int widthR, int heightR)
     
     glEnable(GL_SMOOTH);		// Enable (gouraud) shading
     
-    glEnable(GL_DEPTH_TEST); 	// Disable depth testing
+    glDisable(GL_DEPTH_TEST); 	// Disable depth testing
     
     glEnable(GL_BLEND);		// Enable blending (used for alpha) and blending function to use
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -65,6 +66,7 @@ void initGL(int widthR, int heightR)
 
 void initGame(){
     level = Level(0);
+    gamestate.setGameState(1);
 }
 
 void drawLevel(){
@@ -89,8 +91,6 @@ void drawScene(){
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     
-    
-    
     drawLevel();
     
     glfwSwapBuffers(window);
@@ -108,7 +108,7 @@ int main(void)
         return -1;
     }
     
-    //glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
+    glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
     
     // Open a window and create its OpenGL context
     window = glfwCreateWindow(width, height, "Simple example", NULL, NULL);
@@ -128,7 +128,8 @@ int main(void)
     
     while (!glfwWindowShouldClose(window))
     {
-        camera.computeInputs(window);
+        camera.computeInputs(window, &level, &gamestate);
+        camera.computeInputsMouse(window, &level, &gamestate);
         drawScene();
     }
     glfwDestroyWindow(window);

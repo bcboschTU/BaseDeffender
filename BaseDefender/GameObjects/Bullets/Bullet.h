@@ -8,12 +8,48 @@
 
 #ifndef __BaseDefender__Bullet__
 #define __BaseDefender__Bullet__
+#define PI 3.1415926535897932384626433832795
 
 #include <stdio.h>
+#include <GLFW/glfw3.h>
+#include <math.h>
+#include <iostream>
+
+enum WeaponType{
+    NORMAL = 1,
+    EXPLOSIVE = 2,
+    DUAL = 3,
+    ROCKET = 4
+};
 
 class Bullet{
 public:
-    Bullet();
+    Bullet(float _xPos, float _yPos, float _angle, WeaponType _bulletType);
+    void bulletSetup();
+    void draw();
+    void updateBullet();
+    
+    void explodeBullet();
+    bool getExploding();
+    void setExploding(bool _exploding);
+    void checkIfAlive();
+    bool getDestroyed();
+private:
+    float xPos;
+    float yPos;
+    float angle;
+    WeaponType bulletType;
+    float width;
+    float height;
+    float speed;
+    
+    //lifetime of bullet & destroy
+    float lifeStart;
+    float lifetime;
+    bool destroyed;
+    
+    //explosive:
+    bool exploding;    
 };
 
 #endif /* defined(__BaseDefender__Bullet__) */

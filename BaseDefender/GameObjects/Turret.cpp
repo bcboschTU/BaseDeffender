@@ -7,3 +7,115 @@
 //
 
 #include "Turret.h"
+//
+//  Player.cpp
+//  BaseDefender
+//
+//  Created by Bert Bosch on 28-02-15.
+//  Copyright (c) 2015 Bossos. All rights reserved.
+//
+
+#include "Player.h"
+
+Turret::Turret(std::string _name,
+               int _hp,
+               float _xPos,
+               float _yPos,
+               float _width,
+               float _height,
+               float _angle,
+               int _level):GameObject(_name,_hp,_xPos,_yPos,_width,_height,_angle,_level){
+    weaponType = NORMAL;
+    fireRate = 0.05;
+    range = 2;
+}
+
+void Turret::draw(){
+    glColor3f(0.0f, 1.0f, 0.0f);
+    
+    //glMatrixMode(GL_MODELVIEW);
+    //glLoadIdentity();
+    glPushMatrix();
+    glTranslatef(getXPos(), getYPos(), 0);
+    
+    glBegin(GL_POLYGON);
+    for(double i = 0; i < 2 * PI; i += PI / 32){ //<-- Change this Value
+        glVertex3f(cos(i) * getWidth(), sin(i) * getHeight(), 0.0);
+    }
+    glEnd();
+    
+    glPopMatrix();
+}
+
+void Turret::updateTurret(){
+
+}
+
+void Turret::shoot(float dirXPos, float dirYPos){
+    static double lastTimePrimary = glfwGetTime();
+    double currentTime = glfwGetTime();
+    float deltaTime = float(currentTime - lastTimePrimary);
+    
+    if(deltaTime > fireRate){
+        //calculate angle:
+        float xdif = getXPos() - dirXPos;
+        float ydif = getYPos() - dirYPos;
+        
+        float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
+        
+        std::cout<<"angle: " << angle << "\n";
+        
+        Bullet bullet = Bullet(getXPos(), getYPos(), angle, weaponType);
+        bullets.push_back(bullet);
+        
+        lastTimePrimary = currentTime;
+    }
+}
+
+std::vector<Bullet>* Turret::getBullets(){
+    updateBullets();
+    
+    return &bullets;
+}
+
+void Turret::setTarget(std::vector<Enemie> *enemies){
+    int closest = -1;
+    int distanceClosest  = 10* range;
+    for (int i = 0; i<enemies->size(); i++) {
+        Enemie *enemie = &enemies->at(i);
+        float xPosEnemie = enemie->getXPos();
+        float yPosEnemie = enemie->getYPos();
+        float distance = calculateDistance(getXPos(),xPosEnemie,getYPos(),yPosEnemie);
+        if(distance < range && distanceClosest > distance){
+            closest = i;
+            distanceClosest = distance;
+        }
+    }
+    
+    if (closest != -1) {
+        Enemie *enemie = &enemies->at(closest);
+        shoot(enemie->getXPos(), enemie->getYPos());
+    }
+    
+}
+
+void Turret::updateBullets(){
+    for(int i = 0; i< bullets.size(); i++){
+        Bullet *bullet = &bullets[i];
+        bullet->updateBullet();
+        if(bullet->getDestroyed()){
+            removeBullet(i);
+        }
+        
+    }
+}
+
+void Turret::removeBullet(int index){
+    bullets.erase(bullets.begin() + index);
+}
+
+float Turret::calculateDistance(float x1, float x2, float y1, float y2){
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    return sqrt(dx*dx + dy*dy);
+}

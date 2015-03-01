@@ -13,6 +13,9 @@
 #include <vector>
 #include "Bullet.h"
 #include "Player.h"
+#include "Base.h"
+#include "Turret.h"
+#include "Enemie.h"
 
 class Level{
 public:
@@ -21,12 +24,19 @@ public:
     void loadLevel();
     void drawLevel();
     void updateLevel();
+    void getBullets();
+    Player* getPlayer(int i);
+    float rand_FloatRange(float a, float b);
 private:
     int type;
 
     std::vector<Player> players;
     std::vector<Bullet> bullets;
+    std::vector<Base> bases;
+    std::vector<Turret> turrets;
+    std::vector<Enemie> enemies;
     
+    bool pause;
 };
 
 

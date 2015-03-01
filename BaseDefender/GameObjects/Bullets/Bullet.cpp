@@ -9,11 +9,12 @@
 #include "Bullet.h"
 
 
-Bullet::Bullet(float _xPos, float _yPos, float _angle, WeaponType _bulletType){
+Bullet::Bullet(float _xPos, float _yPos, float _angle, WeaponType _bulletType, std::string _owner){
     xPos = _xPos;
     yPos = _yPos;
     angle = _angle;
     bulletType = _bulletType;
+    owner = _owner;
     lifeStart = glfwGetTime();
     lifetime = 4.0;
     destroyed = false;
@@ -28,21 +29,25 @@ void Bullet::bulletSetup(){
             width = 0.1;
             height = 0.1;
             speed = 0.1;
+            dmg = 10;
             break;
         case EXPLOSIVE:
             width = 0.15;
             height = 0.15;
             speed = 0.08;
+            dmg = 10;
             break;
         case DUAL:
             width = 0.05;
             height = 0.05;
             speed = 0.01;
+            dmg = 10;
             break;
         case ROCKET:
             width = 0.1;
             height = 0.1;
             speed = 0.01;
+            dmg = 10;
             break;
         default:
             break;
@@ -71,6 +76,13 @@ void Bullet::draw(){
             glVertex3f(cos(i) * (width/4)*3, sin(i) * (height/4)*3, 0.0);
         }
         glEnd();
+        
+        glBegin(GL_POLYGON);
+        glColor3f(0.0f, 1.0f, 1.0f);
+        for(double i = 0; i < 2 * PI; i += PI / 32){ //<-- Change this Value
+            glVertex3f(cos(i) * (width/8)*3, sin(i) * (height/8)*3, 0.0);
+        }
+        glEnd();
         glPopMatrix();
         
     }
@@ -83,8 +95,8 @@ void Bullet::updateBullet(){
     
     
     if(exploding){
-        width += 0.02;
-        height += 0.02;
+        width += 0.03;
+        height += 0.03;
     }
     else{
         //update xpos and ypos;
@@ -101,8 +113,12 @@ void Bullet::updateBullet(){
 }
 
 void Bullet::explodeBullet(){
-    exploding = true;
-    lifeStart = glfwGetTime();
+    if (exploding == false) {
+        exploding = true;
+        lifeStart = glfwGetTime();
+        lifetime = 0.3;
+    }
+    
 }
 
 bool Bullet::getExploding(){
@@ -121,9 +137,37 @@ void Bullet::checkIfAlive(){
 }
 
 bool Bullet::getDestroyed(){
+    if(destroyed){
+        return true;
+    }
+    
     float currentTime = glfwGetTime();
     if(currentTime - lifeStart > lifetime){
         return true;
     }
     return false;
+}
+
+float Bullet::getXPos(){
+    return xPos;
+}
+float Bullet::getYPos(){
+    return yPos;
+}
+
+float Bullet::getWidth(){
+    return width;
+}
+
+int Bullet::getDmg(){
+    return dmg;
+}
+
+void Bullet::setDestroyed(bool _destroyed){
+    if(bulletType == EXPLOSIVE){
+        explodeBullet();
+    }
+    else{
+        destroyed = _destroyed;
+    }
 }

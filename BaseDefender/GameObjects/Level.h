@@ -25,13 +25,16 @@ public:
     void drawLevel();
     void updateLevel();
     void getBullets();
+    void checkIfBulletsHit();
+    void checkIfEnemieHit();
+    void updateEnemieVector();
     Player* getPlayer(int i);
     float rand_FloatRange(float a, float b);
 private:
     int type;
 
     std::vector<Player> players;
-    std::vector<Bullet> bullets;
+    std::vector<Bullet*> bullets;
     std::vector<Base> bases;
     std::vector<Turret> turrets;
     std::vector<Enemie> enemies;

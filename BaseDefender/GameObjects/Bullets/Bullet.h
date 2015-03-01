@@ -24,7 +24,7 @@ enum WeaponType{
 
 class Bullet{
 public:
-    Bullet(float _xPos, float _yPos, float _angle, WeaponType _bulletType);
+    Bullet(float _xPos, float _yPos, float _angle, WeaponType _bulletType, std::string _owner);
     void bulletSetup();
     void draw();
     void updateBullet();
@@ -33,7 +33,12 @@ public:
     bool getExploding();
     void setExploding(bool _exploding);
     void checkIfAlive();
+    void setDestroyed(bool _destroyed);
     bool getDestroyed();
+    float getXPos();
+    float getYPos();
+    float getWidth();
+    int getDmg();
 private:
     float xPos;
     float yPos;
@@ -42,7 +47,10 @@ private:
     float width;
     float height;
     float speed;
+    int dmg;
     
+    //owners of the bullet
+    std::string owner;
     //lifetime of bullet & destroy
     float lifeStart;
     float lifetime;

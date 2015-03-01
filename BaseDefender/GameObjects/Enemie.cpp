@@ -26,20 +26,39 @@ Enemie::Enemie(std::string _name,
 }
 
 void Enemie::draw(){
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glPushMatrix();
-    glTranslatef(getXPos(), getYPos(), 0);
+    if(hp>0){
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        glPushMatrix();
+        glTranslatef(getXPos(), getYPos(), 0);
     
     
-    glBegin(GL_POLYGON);
-    glColor3f(0.0f, 0.0f, 1.0f);
-    for(double i = 0; i < 2 * PI; i += PI / 128){ //<-- Change this Value
-        glVertex3f(cos(i) * getWidth(), sin(i) * getHeight(), 0.0);
+        glBegin(GL_POLYGON);
+        glColor3f(0.0f, 0.0f, 1.0f);
+        for(double i = 0; i < 2 * PI; i += PI / 128){ //<-- Change this Value
+            glVertex3f(cos(i) * getWidth(), sin(i) * getHeight(), 0.0);
+        }
+        glEnd();
+    
+        glPopMatrix();
     }
-    glEnd();
+}
+
+void Enemie::updateEnemie(){
     
-    glPopMatrix();
+}
+
+void Enemie::gotHit(std::vector<Bullet*> bullets){
+    for (int i = 0; i< bullets.size(); i++) {
+        Bullet* bullet = bullets[i];
+        float distance = calculateDistance(xPos, bullet->getXPos(), yPos, bullet->getYPos());
+        float hitDistance = width + bullet->getWidth() -width;
+        if(distance < hitDistance){
+            hp = hp - bullet->getDmg();
+            //bullet set on destroyed;
+            bullet->setDestroyed(true);
+        }
+    }
 }
 
 std::string Enemie::getName(){
@@ -89,4 +108,14 @@ int Enemie::getLevel(){
 }
 void Enemie::setLevel(int _level){
     level = _level;
+}
+
+void Enemie::setTarget(GameObject *_target){
+    target = _target;
+}
+
+float Enemie::calculateDistance(float x1, float x2, float y1, float y2){
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    return sqrt(dx*dx + dy*dy);
 }

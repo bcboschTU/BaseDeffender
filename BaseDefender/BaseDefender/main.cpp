@@ -70,7 +70,6 @@ void initGame(){
 }
 
 void drawLevel(){
-    level.updateLevel();
     level.drawLevel();
 }
 

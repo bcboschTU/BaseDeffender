@@ -9,6 +9,7 @@
 #ifndef __BaseDefender__Enemie__
 #define __BaseDefender__Enemie__
 
+#include <stdio.h>
 #include "GameObject.h"
 
 class Enemie{
@@ -22,6 +23,8 @@ public:
            float _angle,
            int _level);
     void draw();
+    void updateEnemie();
+    void gotHit(std::vector<Bullet*> bullets);
     std::string getName();
     void setName(std::string _name);
     int getHp();
@@ -38,6 +41,8 @@ public:
     void setAngle(float _angle);
     int getLevel();
     void setLevel(int level);
+    void setTarget(GameObject *_target);
+    float calculateDistance(float x1, float x2, float y1, float y2);
 private:
     std::string name;
     int hp;
@@ -47,6 +52,7 @@ private:
     float height;
     float angle;
     int level;
+    GameObject *target;
 };
 
 

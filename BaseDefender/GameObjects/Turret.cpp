@@ -16,9 +16,9 @@ Turret::Turret(std::string _name,
                float _height,
                float _angle,
                int _level):GameObject(_name,_hp,_xPos,_yPos,_width,_height,_angle,_level){
-    weaponType = NORMAL;
-    fireRate = 0.05;
-    range = 2;
+    weaponType = EXPLOSIVE;
+    fireRate = 0.5;
+    range = 5;
     lastTime = glfwGetTime();
 }
 
@@ -54,7 +54,7 @@ void Turret::shoot(float dirXPos, float dirYPos){
         
         float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
         
-        Bullet bullet = Bullet(getXPos(), getYPos(), angle, weaponType);
+        Bullet bullet = Bullet(getXPos(), getYPos(), angle, weaponType,getName());
         bullets.push_back(bullet);
         
         lastTime = currentTime;

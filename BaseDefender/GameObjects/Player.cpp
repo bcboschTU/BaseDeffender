@@ -55,7 +55,7 @@ void Player::shootPrimary(float dirXPos, float dirYPos){
         
         float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
         
-        Bullet bullet = Bullet(getXPos(), getYPos(), angle, primaryWeaponType);
+        Bullet bullet = Bullet(getXPos(), getYPos(), angle, primaryWeaponType,getName());
         bullets.push_back(bullet);
         
         lastTimePrimary = currentTime;
@@ -74,7 +74,7 @@ void Player::shootSecondary(float dirXPos, float dirYPos){
         
         float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
         
-        Bullet bullet = Bullet(getXPos(), getYPos(), angle, secondaryWeaponType);
+        Bullet bullet = Bullet(getXPos(), getYPos(), angle, secondaryWeaponType,getName());
         bullets.push_back(bullet);
         
         lastTimeSecondary = currentTime;

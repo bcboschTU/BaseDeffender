@@ -23,6 +23,8 @@
 		D3C220D11AA25E3B00ABF36D /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220CF1AA25E3B00ABF36D /* GameState.cpp */; };
 		D3C220D41AA2702100ABF36D /* Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220D21AA2702100ABF36D /* Base.cpp */; };
 		D3C220D81AA4701900ABF36D /* Explosion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220D61AA4701900ABF36D /* Explosion.cpp */; };
+		D3C220DC1AA4B8F700ABF36D /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220DA1AA4B8F700ABF36D /* Menu.cpp */; };
+		D3C220DF1AA4B91900ABF36D /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220DD1AA4B91900ABF36D /* Button.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -316,6 +318,10 @@
 		D3C220D31AA2702100ABF36D /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base.h; path = GameObjects/Base.h; sourceTree = "<group>"; };
 		D3C220D61AA4701900ABF36D /* Explosion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Explosion.cpp; path = GameObjects/Explosions/Explosion.cpp; sourceTree = "<group>"; };
 		D3C220D71AA4701900ABF36D /* Explosion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Explosion.h; path = GameObjects/Explosions/Explosion.h; sourceTree = "<group>"; };
+		D3C220DA1AA4B8F700ABF36D /* Menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Menu.cpp; path = Menu/Menu.cpp; sourceTree = "<group>"; };
+		D3C220DB1AA4B8F700ABF36D /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = Menu/Menu.h; sourceTree = "<group>"; };
+		D3C220DD1AA4B91900ABF36D /* Button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Button.cpp; path = Menu/Button.cpp; sourceTree = "<group>"; };
+		D3C220DE1AA4B91900ABF36D /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Button.h; path = Menu/Button.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,6 +347,7 @@
 				D3C21FA61AA2239200ABF36D /* OpenGL.framework */,
 				D3C21FA41AA2238E00ABF36D /* GLUT.framework */,
 				D3C21FAC1AA22B9E00ABF36D /* glm */,
+				D3C220D91AA4B8E500ABF36D /* Menu */,
 				D3C220BA1AA22D9B00ABF36D /* GameObjects */,
 				D3C220AA1AA22BFB00ABF36D /* common */,
 				D3C21F9C1AA2238400ABF36D /* BaseDefender */,
@@ -708,6 +715,17 @@
 			name = Explosions;
 			sourceTree = "<group>";
 		};
+		D3C220D91AA4B8E500ABF36D /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				D3C220DA1AA4B8F700ABF36D /* Menu.cpp */,
+				D3C220DB1AA4B8F700ABF36D /* Menu.h */,
+				D3C220DD1AA4B91900ABF36D /* Button.cpp */,
+				D3C220DE1AA4B91900ABF36D /* Button.h */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -765,7 +783,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3C220BD1AA22DB600ABF36D /* GameObject.cpp in Sources */,
+				D3C220DC1AA4B8F700ABF36D /* Menu.cpp in Sources */,
 				D3C220D11AA25E3B00ABF36D /* GameState.cpp in Sources */,
+				D3C220DF1AA4B91900ABF36D /* Button.cpp in Sources */,
 				D3C220CC1AA22E0300ABF36D /* Bullet.cpp in Sources */,
 				D3C220D41AA2702100ABF36D /* Base.cpp in Sources */,
 				D3C220C01AA22DC200ABF36D /* Level.cpp in Sources */,

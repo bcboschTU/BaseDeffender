@@ -19,7 +19,8 @@ enum WeaponType{
     NORMAL = 1,
     EXPLOSIVE = 2,
     DUAL = 3,
-    ROCKET = 4
+    ROCKET = 4,
+    NUKE = 5
 };
 
 class Bullet{
@@ -57,7 +58,8 @@ private:
     bool destroyed;
     
     //explosive:
-    bool exploding;    
+    bool exploding;
+    double explodingTime;
 };
 
 #endif /* defined(__BaseDefender__Bullet__) */

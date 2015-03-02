@@ -15,9 +15,13 @@ Turret::Turret(std::string _name,
                float _width,
                float _height,
                float _angle,
-               int _level):GameObject(_name,_hp,_xPos,_yPos,_width,_height,_angle,_level){
+               int _level,
+               float _rangeBegin,
+               float _rangeEnd):GameObject(_name,_hp,_xPos,_yPos,_width,_height,_angle,_level){
+    rangeBegin = _rangeBegin;
+    rangeEnd = _rangeEnd;
     weaponType = NORMAL;
-    fireRate = 0.1;
+    fireRate = 0.01;
     range = 5;
     lastTime = glfwGetTime();
 }
@@ -75,9 +79,15 @@ void Turret::setTarget(std::vector<Enemie> *enemies){
         float xPosEnemie = enemie->getXPos();
         float yPosEnemie = enemie->getYPos();
         float distance = calculateDistance(getXPos(),xPosEnemie,getYPos(),yPosEnemie);
-        if(distance < range && distanceClosest > distance){
-            closest = i;
-            distanceClosest = distance;
+        float xdif = getXPos() - xPosEnemie;
+        float ydif = getYPos() - yPosEnemie;
+        
+        float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
+        if(angle > rangeBegin && angle < rangeEnd){
+            if(distance < range && distanceClosest > distance){
+                closest = i;
+                distanceClosest = distance;
+            }
         }
     }
     

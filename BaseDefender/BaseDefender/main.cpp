@@ -34,8 +34,8 @@ static void error_callback(int error, const char* description)
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GL_TRUE);
+    //if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+      //  glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
 void initGL(int widthR, int heightR)
@@ -85,6 +85,7 @@ void drawScene(){
     glOrtho(-1, 1, -1 * (GLfloat) height / (GLfloat) width, (GLfloat) height/ (GLfloat) width, -100, 100);
     
     glScaled(camera.getPosition().z, camera.getPosition().z, 1);
+    //glRotated(20, 1.0, 0, 0);
     glTranslatef(camera.getPosition().x, camera.getPosition().y, 0);
     
     glMatrixMode(GL_MODELVIEW);

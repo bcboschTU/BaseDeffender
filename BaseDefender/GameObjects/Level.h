@@ -29,8 +29,10 @@ public:
     void checkIfBulletsHit();
     void checkIfEnemieHit();
     void updateEnemieVector();
+    void generateEnemies();
     Player* getPlayer(int i);
-    float rand_FloatRange(float a, float b);
+    float rand_FloatRange(float a, float b, bool between);
+    void pauseGame();
 private:
     int type;
 
@@ -42,6 +44,10 @@ private:
     std::vector<Explosion> explosions;
     
     bool pause;
+    float lastTimePause;
+    
+    float lastTimeLevel;
+    
 };
 
 

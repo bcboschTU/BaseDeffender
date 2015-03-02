@@ -21,7 +21,9 @@ public:
            float _width,
            float _height,
            float _angle,
-           int _level);
+           int _level,
+           float _rangeBegin,
+           float _rangeEnd);
     void draw();
     void updateTurret();
     void shoot(float dirXPos, float dirYPos);
@@ -37,6 +39,8 @@ private:
     WeaponType weaponType;
     float fireRate;
     float range;
+    float rangeBegin;
+    float rangeEnd;
     float lastTime;
 };
 

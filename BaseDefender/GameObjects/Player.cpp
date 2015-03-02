@@ -16,9 +16,9 @@ Player::Player(std::string _name,
                float _height,
                float _angle,
                int _level):GameObject(_name,_hp,_xPos,_yPos,_width,_height,_angle,_level){
-    fireRatePrimary = 0.05;
+    fireRatePrimary = 0.5;
     fireRateSecondary = 0.1;
-    primaryWeaponType = NORMAL;
+    primaryWeaponType = NUKE;
     secondaryWeaponType = EXPLOSIVE;
     lastTimePrimary = glfwGetTime();
     lastTimeSecondary = glfwGetTime();

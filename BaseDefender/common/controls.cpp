@@ -77,6 +77,10 @@ void Camera::computeInputsGame(GLFWwindow* window,Level *level,GameState* gamest
     if (glfwGetKey(window, GLFW_KEY_D ) == GLFW_PRESS){
         newXPos += 1 * deltaTime * translateSpeed;
     }
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE ) == GLFW_PRESS){
+            level->pauseGame();
+    }
+    
     
     player->setNewPos(newXPos, newYPos);
     
@@ -91,7 +95,6 @@ void Camera::computeInputsGame(GLFWwindow* window,Level *level,GameState* gamest
      _position.z += 1 * deltaTime * zoomSpeed;
      }
      */
-    
     lastTime = currentTime;
     
 }

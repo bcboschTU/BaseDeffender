@@ -19,6 +19,7 @@ Bullet::Bullet(float _xPos, float _yPos, float _angle, WeaponType _bulletType, s
     lifetime = 4.0;
     destroyed = false;
     exploding = false;
+    explodingTime = 0.6;
     bulletSetup();
     
 }
@@ -48,6 +49,14 @@ void Bullet::bulletSetup(){
             height = 0.1;
             speed = 0.01;
             dmg = 10;
+            break;
+        case NUKE:
+            width = 0.1;
+            height = 0.1;
+            speed = 0.008;
+            dmg = 60;
+            lifetime = lifetime*5;
+            explodingTime = explodingTime*2;
             break;
         default:
             break;
@@ -82,6 +91,13 @@ void Bullet::draw(){
         for(double i = 0; i < 2 * PI; i += PI / 32){ //<-- Change this Value
             glVertex3f(cos(i) * (width/8)*3, sin(i) * (height/8)*3, 0.0);
         }
+        
+        glBegin(GL_POLYGON);
+        glColor3f(1.0f, 1.0f, 1.0f);
+        for(double i = 0; i < 2 * PI; i += PI / 32){ //<-- Change this Value
+            glVertex3f(cos(i) * (width/12)*3, sin(i) * (height/12)*3, 0.0);
+        }
+        
         glEnd();
         glPopMatrix();
         
@@ -94,9 +110,13 @@ void Bullet::updateBullet(){
     checkIfAlive();
     
     
-    if(exploding){
+    if(exploding && bulletType == EXPLOSIVE){
         width += 0.03;
         height += 0.03;
+    }
+    else if(exploding && bulletType == NUKE){
+        width += 0.06;
+        height += 0.06;
     }
     else{
         //update xpos and ypos;
@@ -116,7 +136,7 @@ void Bullet::explodeBullet(){
     if (exploding == false) {
         exploding = true;
         lifeStart = glfwGetTime();
-        lifetime = 0.3;
+        lifetime = explodingTime;
     }
     
 }
@@ -164,7 +184,7 @@ int Bullet::getDmg(){
 }
 
 void Bullet::setDestroyed(bool _destroyed){
-    if(bulletType == EXPLOSIVE){
+    if(bulletType == EXPLOSIVE || bulletType == NUKE){
         explodeBullet();
     }
     else{

@@ -27,8 +27,6 @@ public:
     void shoot(float dirXPos, float dirYPos);
     std::vector<Bullet>* getBullets();
     void setTarget(std::vector<Enemie> *enemies);
-    
-    
     float calculateDistance(float x1, float x2, float y1, float y2);
     //remove bullet
     void updateBullets();

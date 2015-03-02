@@ -34,3 +34,10 @@ void Base::draw(){
     
     glPopMatrix();
 }
+
+float Base::getXPos(){
+    return GameObject::getXPos();
+}
+float Base::getYPos(){
+    return GameObject::getYPos();
+}

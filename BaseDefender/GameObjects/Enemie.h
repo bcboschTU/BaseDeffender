@@ -10,7 +10,8 @@
 #define __BaseDefender__Enemie__
 
 #include <stdio.h>
-#include "GameObject.h"
+#include "Player.h"
+#include "Base.h"
 
 class Enemie{
 public:
@@ -25,6 +26,9 @@ public:
     void draw();
     void updateEnemie();
     void gotHit(std::vector<Bullet*> bullets);
+    void calculateNewPos();
+    void calculateNewPosPlayer();
+    void calculateNewPosBase();
     std::string getName();
     void setName(std::string _name);
     int getHp();
@@ -41,7 +45,10 @@ public:
     void setAngle(float _angle);
     int getLevel();
     void setLevel(int level);
-    void setTarget(GameObject *_target);
+    int getDmg();
+    void setDmg(int _dmg);
+    void setTargetPlayer(Player *_target);
+    void setTargetBase(Base *_target);
     float calculateDistance(float x1, float x2, float y1, float y2);
 private:
     std::string name;
@@ -52,7 +59,25 @@ private:
     float height;
     float angle;
     int level;
-    GameObject *target;
+    
+    //is enemie hits something, this dmg
+    float dmg;
+    
+    int targetType;
+    Player *targetPlayer;
+    Base *targetBase;
+    
+    //movement
+    float nextXpos;
+    float nextYpos;
+    float agility;
+    float movementSpeed;
+    float movementXdir;
+    float movementYdir;
+    float maxSpeed;
+    float acceleration;
+    float deceleration;
+    
 };
 
 

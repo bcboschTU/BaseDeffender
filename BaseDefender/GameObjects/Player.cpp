@@ -20,6 +20,12 @@ Player::Player(std::string _name,
     fireRateSecondary = 0.1;
     primaryWeaponType = NORMAL;
     secondaryWeaponType = EXPLOSIVE;
+    lastTimePrimary = glfwGetTime();
+    lastTimeSecondary = glfwGetTime();
+    agility = 0.05;
+    movementSpeed = 0;
+    movementXdir = 0;
+    movementYdir = 0;
     
 }
 
@@ -40,11 +46,38 @@ void Player::draw(){
 }
 
 void Player::updatePlayer(){
+    if(nextXpos == getXPos() && nextYpos == getYPos() && movementSpeed >= 0){
+        movementSpeed -= 0.01;
+    }
+    if((nextXpos != getXPos() || nextYpos != getYPos()) &&  movementSpeed < 2){
+        movementSpeed += 0.15;
+    }
+    if (movementSpeed < 0) {
+        movementXdir = 0;
+        movementYdir = 0;
+    }
     
+    if(movementXdir == 0 && movementYdir == 0){
+        float xDif = nextXpos - getXPos();
+        float yDif = nextYpos - getYPos();
+        movementXdir = xDif;
+        movementYdir = yDif;
+    }
+    else{
+        float xDif = nextXpos - getXPos();
+        float yDif = nextYpos - getYPos();
+        movementXdir = movementXdir * (1-agility) + (xDif * agility);
+        movementYdir = movementYdir * (1-agility) + (yDif * agility);;
+    }
+    
+    nextXpos = getXPos() + movementXdir * (movementSpeed);
+    nextYpos = getYPos() + movementYdir * (movementSpeed);
+    
+    setXPos(nextXpos);
+    setYPos(nextYpos);
 }
 
 void Player::shootPrimary(float dirXPos, float dirYPos){
-    static double lastTimePrimary = glfwGetTime();
     double currentTime = glfwGetTime();
     float deltaTime = float(currentTime - lastTimePrimary);
     
@@ -63,7 +96,6 @@ void Player::shootPrimary(float dirXPos, float dirYPos){
 }
 
 void Player::shootSecondary(float dirXPos, float dirYPos){
-    static double lastTimeSecondary = glfwGetTime();
     double currentTime = glfwGetTime();
     float deltaTime = float(currentTime - lastTimeSecondary);
     
@@ -99,8 +131,8 @@ float Player::getYPos(){
 }
 
 void Player::setNewPos(float newXPos, float newYPos){
-    setXPos(newXPos);
-    setYPos(newYPos);
+    nextXpos = newXPos;
+    nextYpos = newYPos;
 }
 
 void Player::updateBullets(){
@@ -116,4 +148,15 @@ void Player::updateBullets(){
 
 void Player::removeBullet(int index){
     bullets.erase(bullets.begin() + index);
+}
+
+
+bool Player::getHitByEnemie(float enemieXPos, float enemieYPos, float enemieWidth, int dmg){
+    float distance = calculateDistance(getXPos(), enemieXPos, getYPos(), enemieYPos);
+    float hitDistance = getWidth() + enemieWidth;
+    if(distance < hitDistance){
+        setHp(getHp()- dmg);
+        return true;
+    }
+    return false;
 }

@@ -22,6 +22,8 @@ public:
           float _angle,
           int _level);
     void draw();
+    float getXPos();
+    float getYPos();
 private:
     
 };

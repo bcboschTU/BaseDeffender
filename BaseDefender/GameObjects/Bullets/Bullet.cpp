@@ -28,7 +28,7 @@ void Bullet::bulletSetup(){
         case NORMAL:
             width = 0.1;
             height = 0.1;
-            speed = 0.1;
+            speed = 0.2;
             dmg = 10;
             break;
         case EXPLOSIVE:

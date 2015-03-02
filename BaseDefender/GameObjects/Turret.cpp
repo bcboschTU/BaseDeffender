@@ -16,8 +16,8 @@ Turret::Turret(std::string _name,
                float _height,
                float _angle,
                int _level):GameObject(_name,_hp,_xPos,_yPos,_width,_height,_angle,_level){
-    weaponType = EXPLOSIVE;
-    fireRate = 0.5;
+    weaponType = NORMAL;
+    fireRate = 0.1;
     range = 5;
     lastTime = glfwGetTime();
 }

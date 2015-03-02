@@ -22,6 +22,7 @@
 		D3C220CC1AA22E0300ABF36D /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220CA1AA22E0300ABF36D /* Bullet.cpp */; };
 		D3C220D11AA25E3B00ABF36D /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220CF1AA25E3B00ABF36D /* GameState.cpp */; };
 		D3C220D41AA2702100ABF36D /* Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220D21AA2702100ABF36D /* Base.cpp */; };
+		D3C220D81AA4701900ABF36D /* Explosion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220D61AA4701900ABF36D /* Explosion.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -313,6 +314,8 @@
 		D3C220D01AA25E3B00ABF36D /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameState.h; path = common/GameState.h; sourceTree = "<group>"; };
 		D3C220D21AA2702100ABF36D /* Base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Base.cpp; path = GameObjects/Base.cpp; sourceTree = "<group>"; };
 		D3C220D31AA2702100ABF36D /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base.h; path = GameObjects/Base.h; sourceTree = "<group>"; };
+		D3C220D61AA4701900ABF36D /* Explosion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Explosion.cpp; path = GameObjects/Explosions/Explosion.cpp; sourceTree = "<group>"; };
+		D3C220D71AA4701900ABF36D /* Explosion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Explosion.h; path = GameObjects/Explosions/Explosion.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -661,6 +664,7 @@
 		D3C220BA1AA22D9B00ABF36D /* GameObjects */ = {
 			isa = PBXGroup;
 			children = (
+				D3C220D51AA46FF800ABF36D /* Explosions */,
 				D3C220CE1AA22E1A00ABF36D /* Enemies */,
 				D3C220CD1AA22E0700ABF36D /* Bullets */,
 				D3C220BB1AA22DB600ABF36D /* GameObject.cpp */,
@@ -693,6 +697,15 @@
 				D3C220C81AA22DF300ABF36D /* Enemie.h */,
 			);
 			name = Enemies;
+			sourceTree = "<group>";
+		};
+		D3C220D51AA46FF800ABF36D /* Explosions */ = {
+			isa = PBXGroup;
+			children = (
+				D3C220D61AA4701900ABF36D /* Explosion.cpp */,
+				D3C220D71AA4701900ABF36D /* Explosion.h */,
+			);
+			name = Explosions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -762,6 +775,7 @@
 				D3C220B91AA22CD500ABF36D /* texture.cpp in Sources */,
 				D3C220C91AA22DF300ABF36D /* Enemie.cpp in Sources */,
 				D3C220AD1AA22C5900ABF36D /* controls.cpp in Sources */,
+				D3C220D81AA4701900ABF36D /* Explosion.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -887,6 +901,7 @@
 				D3C21FA31AA2238400ABF36D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

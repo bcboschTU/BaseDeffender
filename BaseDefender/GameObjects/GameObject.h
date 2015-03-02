@@ -15,6 +15,7 @@
 #include <string>
 #include <GLFW/glfw3.h>
 #include <vector>
+#include <cmath>
 
 #include "Bullet.h"
 
@@ -48,7 +49,7 @@ public:
     void setAngle(float _angle);
     int getLevel();
     void setLevel(int level);
-    
+    float calculateDistance(float x1, float x2, float y1, float y2);
 private:
     std::string name;
     int hp;

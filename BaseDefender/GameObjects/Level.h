@@ -16,6 +16,7 @@
 #include "Base.h"
 #include "Turret.h"
 #include "Enemie.h"
+#include "Explosion.h"
 
 class Level{
 public:
@@ -38,6 +39,7 @@ private:
     std::vector<Base> bases;
     std::vector<Turret> turrets;
     std::vector<Enemie> enemies;
+    std::vector<Explosion> explosions;
     
     bool pause;
 };

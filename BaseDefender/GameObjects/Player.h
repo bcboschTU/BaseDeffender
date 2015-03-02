@@ -11,6 +11,8 @@
 
 #include "GameObject.h"
 
+class Enemie;
+
 class Player:GameObject{
 public:
     Player(std::string _name,
@@ -36,14 +38,31 @@ public:
     //remove bullet
     void updateBullets();
     void removeBullet(int index);
+    
+    //enemie hit
+    bool getHitByEnemie(float enemieXPos, float enemieYPos, float enemieWidth, int dmg);
 private:
     std::vector<Bullet> bullets;
     float fireRatePrimary;
     float fireRateSecondary;
     
+    
+    //movement
+    float nextXpos;
+    float nextYpos;
+    float agility;
+    float movementSpeed;
+    float movementXdir;
+    float movementYdir;
+    
+    
     //weapontype
     WeaponType primaryWeaponType;
     WeaponType secondaryWeaponType;
+    
+    //time
+    double lastTimePrimary;
+    double lastTimeSecondary;
 };
 
 #endif /* defined(__BaseDefender__Player__) */

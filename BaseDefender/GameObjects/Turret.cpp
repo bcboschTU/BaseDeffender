@@ -33,11 +33,30 @@ void Turret::draw(){
     //glLoadIdentity();
     glPushMatrix();
     glTranslatef(getXPos(), getYPos(), 0);
+    glScaled(2, 2, 1);
+    glRotated(getAngle(), 0.0, 0.0, 1.0);
+    glTranslatef(-getXPos(), -getYPos(), 0);
     
+    
+    
+    /*
     glBegin(GL_POLYGON);
     for(double i = 0; i < 2 * PI; i += PI / 32){ //<-- Change this Value
         glVertex3f(cos(i) * getWidth(), sin(i) * getHeight(), 0.0);
     }
+    glEnd();
+    */
+    
+    glBegin(GL_QUADS);              // Each set of 4 vertices form a quad
+        glColor4f(1.0f, 1.0f, 1.0f,1.0f);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex2f(getXPos() - getWidth(), getYPos() - getHeight());    // x, y
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex2f(getXPos() + getWidth(), getYPos() - getHeight());
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex2f(getXPos() + getWidth(), getYPos() + getHeight());
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex2f(getXPos() - getWidth(), getYPos() + getHeight());
     glEnd();
     
     glPopMatrix();
@@ -57,6 +76,7 @@ void Turret::shoot(float dirXPos, float dirYPos){
         float ydif = getYPos() - dirYPos;
         
         float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
+        setAngle(angle);
         
         Bullet bullet = Bullet(getXPos(), getYPos(), angle, weaponType,getName());
         bullets.push_back(bullet);

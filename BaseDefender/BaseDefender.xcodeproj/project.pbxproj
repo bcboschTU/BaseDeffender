@@ -25,15 +25,19 @@
 		D3C220D81AA4701900ABF36D /* Explosion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220D61AA4701900ABF36D /* Explosion.cpp */; };
 		D3C220DC1AA4B8F700ABF36D /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220DA1AA4B8F700ABF36D /* Menu.cpp */; };
 		D3C220DF1AA4B91900ABF36D /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220DD1AA4B91900ABF36D /* Button.cpp */; };
+		D3C220E31AA4C19100ABF36D /* base.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3C220E11AA4C18A00ABF36D /* base.png */; };
+		D3C220E41AA4C19100ABF36D /* tank_turret.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3C220E21AA4C18A00ABF36D /* tank_turret.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D3C21F981AA2238400ABF36D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			dstPath = usr/share/man/man1;
+			dstSubfolderSpec = 7;
 			files = (
+				D3C220E31AA4C19100ABF36D /* base.png in CopyFiles */,
+				D3C220E41AA4C19100ABF36D /* tank_turret.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -322,6 +326,8 @@
 		D3C220DB1AA4B8F700ABF36D /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = Menu/Menu.h; sourceTree = "<group>"; };
 		D3C220DD1AA4B91900ABF36D /* Button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Button.cpp; path = Menu/Button.cpp; sourceTree = "<group>"; };
 		D3C220DE1AA4B91900ABF36D /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Button.h; path = Menu/Button.h; sourceTree = "<group>"; };
+		D3C220E11AA4C18A00ABF36D /* base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = base.png; path = Textures/base.png; sourceTree = "<group>"; };
+		D3C220E21AA4C18A00ABF36D /* tank_turret.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tank_turret.png; path = Textures/tank_turret.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +353,7 @@
 				D3C21FA61AA2239200ABF36D /* OpenGL.framework */,
 				D3C21FA41AA2238E00ABF36D /* GLUT.framework */,
 				D3C21FAC1AA22B9E00ABF36D /* glm */,
+				D3C220E01AA4C11300ABF36D /* Textures */,
 				D3C220D91AA4B8E500ABF36D /* Menu */,
 				D3C220BA1AA22D9B00ABF36D /* GameObjects */,
 				D3C220AA1AA22BFB00ABF36D /* common */,
@@ -726,6 +733,15 @@
 			name = Menu;
 			sourceTree = "<group>";
 		};
+		D3C220E01AA4C11300ABF36D /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				D3C220E11AA4C18A00ABF36D /* base.png */,
+				D3C220E21AA4C18A00ABF36D /* tank_turret.png */,
+			);
+			name = Textures;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -835,7 +851,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -870,7 +886,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};

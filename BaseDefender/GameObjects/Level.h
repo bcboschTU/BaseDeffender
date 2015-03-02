@@ -11,12 +11,14 @@
 
 #include <stdio.h>
 #include <vector>
+#include <GLUT/glut.h>
 #include "Bullet.h"
 #include "Player.h"
 #include "Base.h"
 #include "Turret.h"
 #include "Enemie.h"
 #include "Explosion.h"
+#include "texture.hpp"
 
 class Level{
 public:
@@ -33,6 +35,10 @@ public:
     Player* getPlayer(int i);
     float rand_FloatRange(float a, float b, bool between);
     void pauseGame();
+    void checkIfGameOver();
+    void resetLevel();
+    void loadTextures();
+    void renderString(float x, float y, void *font, const std::string &string);
 private:
     int type;
 
@@ -43,9 +49,13 @@ private:
     std::vector<Enemie> enemies;
     std::vector<Explosion> explosions;
     
+    GLuint texture1;
+    GLuint texture2;
+    std::vector<GLuint> textures;
+    std::vector<std::string> textureNamesPosition;
+    
     bool pause;
     float lastTimePause;
-    
     float lastTimeLevel;
     
 };

@@ -23,13 +23,17 @@ void Base::draw(){
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glPushMatrix();
-    glTranslatef(getXPos(), getYPos(), 0);
     
-    glBegin(GL_POLYGON);
-    glColor3f(1.0f, 0.0f, 0.0f);
-    for(double i = 0; i < 2 * PI; i += PI / 128){ //<-- Change this Value
-        glVertex3f(cos(i) * getWidth(), sin(i) * getHeight(), 0.0);
-    }
+    glBegin(GL_QUADS);              // Each set of 4 vertices form a quad
+        glColor4f(1.0f, 1.0f, 1.0f,1.0f);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex2f(getXPos() - getWidth(), getYPos() - getHeight());    // x, y
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex2f(getXPos() + getWidth(), getYPos() - getHeight());
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex2f(getXPos() + getWidth(), getYPos() + getHeight());
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex2f(getXPos() - getWidth(), getYPos() + getHeight());
     glEnd();
     
     glPopMatrix();

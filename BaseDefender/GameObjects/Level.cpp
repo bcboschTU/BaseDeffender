@@ -55,15 +55,24 @@ void Level::loadLevel(){
     Turret turret24 = Turret("Turret4Base2", 100, 0.4-3, -0.4, 0.15, 0.15, 0, 1, 280, 350);
     turrets.push_back(turret24);
     
-    /*
-     for(int i = 0; i<100; i++){
-     float xPos = rand_FloatRange(-5,5,true);
-     float yPos = rand_FloatRange(-5,5,false);
-     Enemie enemie = Enemie("enemie", 20, xPos, yPos, 0.2, 0.2, 0, 1);
-     enemie.setTargetPlayer(&players[0]);
-     enemies.push_back(enemie);
-     }
-     */
+    
+    Base base3 = Base("Base3", 500, 3, 0, 0.4, 0.4, 0, 1);
+    bases.push_back(base3);
+    
+    Turret turret31 = Turret("Turret1Base3", 100, 0.4 + 3, 0.4, 0.15, 0.15, 0, 1, 10, 80);
+    turrets.push_back(turret31);
+    
+    Turret turret32 = Turret("Turret2Base3", 100, -0.4 + 3, -0.4, 0.15, 0.15, 0, 1, 190, 260);
+    turrets.push_back(turret32);
+    
+    Turret turret33 = Turret("Turret3Base3", 100, -0.4 + 3, 0.4, 0.15, 0.15, 0, 1, 100, 170);
+    turrets.push_back(turret33);
+    
+    Turret turret34 = Turret("Turret4Base3", 100, 0.4 + 3, -0.4, 0.15, 0.15, 0, 1, 280, 350);
+    turrets.push_back(turret34);
+    
+    
+    loadTextures();
 }
 
 void Level::drawLevel(){
@@ -77,16 +86,6 @@ void Level::drawLevel(){
         player->draw();
     }
     
-    for (int i = 0; i<bases.size(); i++) {
-        Base * base = &bases[i];
-        base->draw();
-    }
-    
-    for (int i = 0; i<turrets.size(); i++) {
-        Turret * turret = &turrets[i];
-        turret->draw();
-    }
-    
     for (int i = 0; i<enemies.size(); i++) {
         Enemie * enemie = &enemies[i];
         enemie->draw();
@@ -96,9 +95,31 @@ void Level::drawLevel(){
         Bullet *bullet = bullets[i];
         bullet->draw();
     }
+    
+    
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture2);
+    for (int i = 0; i<turrets.size(); i++) {
+        Turret * turret = &turrets[i];
+        turret->draw();
+    }
+    
+    glBindTexture(GL_TEXTURE_2D, texture1);
+    for (int i = 0; i<bases.size(); i++) {
+        Base * base = &bases[i];
+        base->draw();
+    }
+    
+    glDisable(GL_TEXTURE_2D);
+    
+    
+    renderString(-2, -2, GLUT_BITMAP_HELVETICA_18, "test");
+    
+    
 }
 
 void Level::updateLevel(){
+    checkIfGameOver();
     //clear all the bullets from last frame
     bullets.clear();
     //get all bullets:
@@ -131,8 +152,6 @@ void Level::updateLevel(){
         Turret *turret = &turrets[i];
         turret->setTarget(&enemies);
     }
-    
-    
 }
 
 void Level::getBullets(){
@@ -236,7 +255,7 @@ void Level::generateEnemies(){
     double currentTime = glfwGetTime();
     float deltaTime = float(currentTime - lastTimeLevel);
     if(deltaTime > 0.01){
-        for(int i = 0; i< 1; i++){
+        for(int i = 0; i< 2; i++){
             float xPos = rand_FloatRange(-10,10, true);
             float yPos = rand_FloatRange(-10,10, false);
             Enemie enemie = Enemie("enemie", 50, xPos, yPos, 0.2, 0.2, 0, 1);
@@ -256,4 +275,43 @@ void Level::pauseGame(){
         lastTimePause = currentTime;
     }
     
+    if(!pause){
+        //unpause all vectors, set time.
+    }
+}
+
+void Level::checkIfGameOver(){
+    for (int i = 0; i<players.size(); i++) {
+        Player * player = &players[i];
+        if(player->getHp() <= 0){
+            resetLevel();
+        }
+    }
+}
+
+void Level::resetLevel(){
+    players.clear();
+    bullets.clear();
+    bases.clear();
+    turrets.clear();
+    enemies.clear();
+    explosions.clear();
+    glDeleteTextures(1, &texture1);
+    glDeleteTextures(1, &texture2);
+    loadLevel();
+}
+
+void Level::loadTextures(){
+    std::cout << "load textures \n";
+    texture1 = loadPng("/Users/bertbosch/Documents/delft/game/BaseDeffender/BaseDefender/Textures/base.png");
+    texture2 = loadPng("/Users/bertbosch/Documents/delft/game/BaseDeffender/BaseDefender/Textures/tank_turret.png");
+}
+
+void Level::renderString(float x, float y, void *font, const std::string &string)
+{
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glRasterPos2f(x, y);
+    for (int n=0; n<string.size(); ++n) {
+        glutBitmapCharacter(font, string[n]);
+    }
 }

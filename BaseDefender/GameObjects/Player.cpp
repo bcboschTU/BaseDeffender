@@ -16,9 +16,9 @@ Player::Player(std::string _name,
                float _height,
                float _angle,
                int _level):GameObject(_name,_hp,_xPos,_yPos,_width,_height,_angle,_level){
-    fireRatePrimary = 0.5;
+    fireRatePrimary = 0.01;
     fireRateSecondary = 0.1;
-    primaryWeaponType = NUKE;
+    primaryWeaponType = NORMAL;
     secondaryWeaponType = EXPLOSIVE;
     lastTimePrimary = glfwGetTime();
     lastTimeSecondary = glfwGetTime();
@@ -26,6 +26,8 @@ Player::Player(std::string _name,
     movementSpeed = 0;
     movementXdir = 0;
     movementYdir = 0;
+    nextXpos = _xPos;
+    nextYpos = _yPos;
     
 }
 
@@ -128,6 +130,10 @@ float Player::getXPos(){
 }
 float Player::getYPos(){
     return GameObject::getYPos();
+}
+
+int Player::getHp(){
+    return GameObject::getHp();
 }
 
 void Player::setNewPos(float newXPos, float newYPos){

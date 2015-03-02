@@ -33,6 +33,7 @@ public:
     //getter & setters
     float getXPos();
     float getYPos();
+    int getHp();
     void setNewPos(float newXPos, float newYPos);
     
     //remove bullet

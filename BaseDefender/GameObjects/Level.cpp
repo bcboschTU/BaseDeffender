@@ -282,8 +282,8 @@ float Level::rand_FloatRange(float a, float b, bool between){
 void Level::generateEnemies(){
     double currentTime = glfwGetTime();
     float deltaTime = float(currentTime - lastTimeLevel);
-    if(deltaTime > 0.05 && enemies.size() < 350){
-        for(int i = 0; i< 5; i++){
+    if(deltaTime > 0.05 && enemies.size() < 100){
+        for(int i = 0; i< 2; i++){
             float xPos = rand_FloatRange(-14,14, true);
             float yPos = rand_FloatRange(-14,14, false);
             Enemie enemie = Enemie("enemie", 10, xPos, yPos, 0.2, 0.2, 0, 1);

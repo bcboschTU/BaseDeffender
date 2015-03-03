@@ -70,30 +70,19 @@ void Bullet::draw(){
         glPushMatrix();
         glTranslatef(xPos, yPos, 0);
         
-        /*
-        glBegin(GL_TRIANGLE_FAN);
-        {
-            glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-            glVertex3f(0, 0, 0);
-            // Set edge colour for rest of shape
-            glColor4f(0.0f, 0.0f, 0.0f, 0.0f);
-            for (float angle=0; angle<= PI*2; angle+=((PI*2)/32) )
-            {
-                glVertex3f( width*(float)cos(angle),
-                              width*(float)sin(angle), 0.0f);
-            }
-            glVertex3f(0+ width, 0, 0.0f);
+        if(width < 0.15){
+            numTriangles = 4;
         }
-        glEnd();
-        */
-        
+        else{
+            numTriangles = 8;
+        }
         
         glBegin(GL_TRIANGLE_FAN);
         glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
         glVertex3f(0, 0, 0);
         // Set edge colour for rest of shape
         glColor4f(1.0f, 0.0f, 0.0f, 0.0f);
-        for(double i = 0; i < 2 * PI; i += PI / 32){ //<-- Change this Value
+        for(double i = 0; i < 2 * PI; i += PI / numTriangles){ //<-- Change this Value
             glVertex3f(cos(i) * width, sin(i) * height, 0.0);
         }
         glVertex3f(width, 0, 0.0f);
@@ -105,7 +94,7 @@ void Bullet::draw(){
         glVertex3f(0, 0, 0);
         // Set edge colour for rest of shape
         glColor4f(1.0f, 1.0f, 0.0f, 0.0f);
-        for(double i = 0; i < 2 * PI; i += PI / 32){ //<-- Change this Value
+        for(double i = 0; i < 2 * PI; i += PI / numTriangles){ //<-- Change this Value
             glVertex3f(cos(i) * (width/4)*3, sin(i) * (height/4)*3, 0.0);
         }
         glVertex3f((width/4)*3, 0, 0.0f);
@@ -116,7 +105,7 @@ void Bullet::draw(){
         glVertex3f(0, 0, 0);
         // Set edge colour for rest of shape
         glColor4f(0.0f, 1.0f, 1.0f, 0.0f);
-        for(double i = 0; i < 2 * PI; i += PI / 32){ //<-- Change this Value
+        for(double i = 0; i < 2 * PI; i += PI / numTriangles){ //<-- Change this Value
             glVertex3f(cos(i) * (width/8)*3, sin(i) * (height/8)*3, 0.0);
         }
         glVertex3f((width/8)*3, 0, 0.0f);
@@ -127,7 +116,7 @@ void Bullet::draw(){
         glVertex3f(0, 0, 0);
         // Set edge colour for rest of shape
         glColor4f(1.0f, 1.0f, 1.0f, 0.0f);
-        for(double i = 0; i < 2 * PI; i += PI / 32){ //<-- Change this Value
+        for(double i = 0; i < 2 * PI; i += PI / numTriangles){ //<-- Change this Value
             glVertex3f(cos(i) * (width/12)*3, sin(i) * (height/12)*3, 0.0);
         }
         glVertex3f((width/12)*3, 0, 0.0f);

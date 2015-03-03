@@ -51,6 +51,9 @@ private:
     float lifetime;
     bool destroyed;
     
+    //roundnes
+    int numTriangles;
+    
 };
 
 #endif /* defined(__BaseDefender__Explosion__) */

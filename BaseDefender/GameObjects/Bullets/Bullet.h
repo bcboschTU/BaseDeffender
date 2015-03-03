@@ -61,6 +61,9 @@ private:
     //explosive:
     bool exploding;
     double explodingTime;
+    
+    //roundness
+    int numTriangles;
 };
 
 #endif /* defined(__BaseDefender__Bullet__) */

@@ -55,15 +55,15 @@ void Enemie::draw(){
         glTranslatef(getXPos(), getYPos(), 0);
         
         glBegin(GL_QUADS);              // Each set of 4 vertices form a quad
-        glColor4f(1.0f, 1.0f, 1.0f,1.0f);
-        glTexCoord2f(0.0f, 1.0f);
-        glVertex2f(-getWidth(), - getHeight());    // x, y
-        glTexCoord2f(0.0f, 0.0f);
-        glVertex2f(getWidth(),- getHeight());
-        glTexCoord2f(1.0f, 0.0f);
-        glVertex2f(getWidth(), getHeight());
-        glTexCoord2f(1.0f, 1.0f);
-        glVertex2f(- getWidth(), getHeight());
+            glColor4f(1.0f, 1.0f, 1.0f,1.0f);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex2f(-getWidth(), - getHeight());    // x, y
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex2f(getWidth(),- getHeight());
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex2f(getWidth(), getHeight());
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex2f(- getWidth(), getHeight());
         glEnd();
         
         glPopMatrix();

@@ -27,7 +27,7 @@ Level::Level(int _type){
 }
 
 void Level::loadLevel(){
-    Player player1 = Player("Player1", 200, 1, 1, 0.4, 0.4, 0, 1);
+    Player player1 = Player("Player1", 200, 0, 3, 0.4, 0.4, 0, 1);
     players.push_back(player1);
     
     Base base1 = Base("Base1", 500, 0, 0, 0.8, 0.8, 0, 1);
@@ -118,10 +118,6 @@ void Level::drawLevel(){
     glDisable(GL_TEXTURE_2D);
     
     
-    
-    
-    
-    
     for (int i = 0; i<bullets.size(); i++) {
         Bullet *bullet = bullets[i];
         bullet->draw();
@@ -133,10 +129,7 @@ void Level::drawLevel(){
     }
     
     
-    
-    
-    
-    renderString(-2, -2, GLUT_BITMAP_HELVETICA_18, "test");
+    //renderString(-2, -2, GLUT_BITMAP_HELVETICA_18, "test");
     
     
 }
@@ -289,8 +282,8 @@ float Level::rand_FloatRange(float a, float b, bool between){
 void Level::generateEnemies(){
     double currentTime = glfwGetTime();
     float deltaTime = float(currentTime - lastTimeLevel);
-    if(deltaTime > 0.01 && enemies.size() < 500){
-        for(int i = 0; i< 1; i++){
+    if(deltaTime > 0.05 && enemies.size() < 350){
+        for(int i = 0; i< 5; i++){
             float xPos = rand_FloatRange(-14,14, true);
             float yPos = rand_FloatRange(-14,14, false);
             Enemie enemie = Enemie("enemie", 10, xPos, yPos, 0.2, 0.2, 0, 1);

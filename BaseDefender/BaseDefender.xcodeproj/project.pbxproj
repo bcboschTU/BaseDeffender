@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D3337A4C1AA6512D00A63E52 /* Background.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3337A4A1AA6512D00A63E52 /* Background.cpp */; };
 		D3C21F9E1AA2238400ABF36D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C21F9D1AA2238400ABF36D /* main.cpp */; };
 		D3C21FA51AA2238E00ABF36D /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C21FA41AA2238E00ABF36D /* GLUT.framework */; };
 		D3C21FA71AA2239200ABF36D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C21FA61AA2239200ABF36D /* OpenGL.framework */; };
@@ -45,6 +46,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D3337A4A1AA6512D00A63E52 /* Background.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Background.cpp; path = Background/Background.cpp; sourceTree = "<group>"; };
+		D3337A4B1AA6512D00A63E52 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Background.h; path = Background/Background.h; sourceTree = "<group>"; };
+		D3337A4E1AA66A3B00A63E52 /* background1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background1.png; path = Textures/background1.png; sourceTree = "<group>"; };
+		D3337A4F1AA66AE200A63E52 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = player.png; path = Textures/player.png; sourceTree = "<group>"; };
+		D3337A501AA66FE200A63E52 /* background2.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background2.PNG; path = Textures/background2.PNG; sourceTree = "<group>"; };
+		D3337A511AA66FE200A63E52 /* tank1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tank1.png; path = Textures/tank1.png; sourceTree = "<group>"; };
 		D3C21F9A1AA2238400ABF36D /* BaseDefender */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BaseDefender; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3C21F9D1AA2238400ABF36D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D3C21FA41AA2238E00ABF36D /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -348,6 +355,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D3337A491AA6511600A63E52 /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				D3337A4A1AA6512D00A63E52 /* Background.cpp */,
+				D3337A4B1AA6512D00A63E52 /* Background.h */,
+			);
+			name = Background;
+			sourceTree = "<group>";
+		};
 		D3C21F911AA2238400ABF36D = {
 			isa = PBXGroup;
 			children = (
@@ -683,6 +699,7 @@
 		D3C220BA1AA22D9B00ABF36D /* GameObjects */ = {
 			isa = PBXGroup;
 			children = (
+				D3337A491AA6511600A63E52 /* Background */,
 				D3C220D51AA46FF800ABF36D /* Explosions */,
 				D3C220CE1AA22E1A00ABF36D /* Enemies */,
 				D3C220CD1AA22E0700ABF36D /* Bullets */,
@@ -741,6 +758,10 @@
 		D3C220E01AA4C11300ABF36D /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				D3337A501AA66FE200A63E52 /* background2.PNG */,
+				D3337A511AA66FE200A63E52 /* tank1.png */,
+				D3337A4F1AA66AE200A63E52 /* player.png */,
+				D3337A4E1AA66A3B00A63E52 /* background1.png */,
 				D3C220E11AA4C18A00ABF36D /* base.png */,
 				D3C220E21AA4C18A00ABF36D /* tank_turret.png */,
 			);
@@ -818,6 +839,7 @@
 				D3C220C91AA22DF300ABF36D /* Enemie.cpp in Sources */,
 				D3C220AD1AA22C5900ABF36D /* controls.cpp in Sources */,
 				D3C220D81AA4701900ABF36D /* Explosion.cpp in Sources */,
+				D3337A4C1AA6512D00A63E52 /* Background.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

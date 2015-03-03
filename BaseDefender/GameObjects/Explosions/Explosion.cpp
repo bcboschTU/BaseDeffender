@@ -24,14 +24,14 @@ Explosion::Explosion(float _xPos, float _yPos, ExplosionType _type){
 void Explosion::explosionSetup(){
     switch (type) {
         case SMALL:
-            width = 0.05;
-            height = 0.05;
-            widthMax = 0.1;
-            heightMax = 0.1;
+            width = 0.1;
+            height = 0.1;
+            widthMax = 0.2;
+            heightMax = 0.2;
             offSetMin = -0.1;
             offSetPlus = 0.1;
             amountOfExplosions = 1;
-            lifetime = 0.3;
+            lifetime = 0.35;
             break;
         case MEDIUM:
             width = 0.05;

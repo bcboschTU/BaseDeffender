@@ -33,7 +33,7 @@ void Turret::draw(){
     //glLoadIdentity();
     glPushMatrix();
     glTranslatef(getXPos(), getYPos(), 0);
-    glScaled(2, 2, 1);
+    glScaled(3, 3, 1);
     glRotated(getAngle(), 0.0, 0.0, 1.0);
     glTranslatef(-getXPos(), -getYPos(), 0);
     

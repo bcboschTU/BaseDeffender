@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "Player.h"
 #include "Base.h"
-//#include "QuadTree.h"
+#include "QuadTree.h"
 
 class Enemie{
 public:
@@ -27,7 +27,7 @@ public:
     void draw();
     void updateEnemie();
     int gotHit(std::vector<Bullet*> bullets);
-    //int gotHitTree(QuadtreeBullet* quadtree);
+    int gotHitTree(QuadtreeBullet* quadtree);
     void calculateNewPos();
     void calculateNewPosPlayer();
     void calculateNewPosBase();

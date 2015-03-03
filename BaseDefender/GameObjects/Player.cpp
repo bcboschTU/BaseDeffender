@@ -16,9 +16,9 @@ Player::Player(std::string _name,
                float _height,
                float _angle,
                int _level):GameObject(_name,_hp,_xPos,_yPos,_width,_height,_angle,_level){
-    fireRatePrimary = 1.0;
+    fireRatePrimary = 0.1;
     fireRateSecondary = 0.1;
-    primaryWeaponType = NUKE;
+    primaryWeaponType = NORMAL;
     secondaryWeaponType = EXPLOSIVE;
     lastTimePrimary = glfwGetTime();
     lastTimeSecondary = glfwGetTime();
@@ -36,12 +36,21 @@ void Player::draw(){
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(getXPos(), getYPos(), 0);
+    glRotated(getAngle()+270, 0.0, 0.0, 1.0);
+    glTranslatef(-getXPos(), -getYPos(), 0);
     
-    glBegin(GL_POLYGON);
-    glColor3f(0.0f, 1.0f, 0.0f);
-    for(double i = 0; i < 2 * PI; i += PI / 128){ //<-- Change this Value
-        glVertex3f(cos(i) * getWidth(), sin(i) * getHeight(), 0.0);
-    }
+    glTranslatef(getXPos(), getYPos(), 0);
+    
+    glBegin(GL_QUADS);              // Each set of 4 vertices form a quad
+    glColor4f(1.0f, 1.0f, 1.0f,1.0f);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex2f(-getWidth(), - getHeight());    // x, y
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex2f(getWidth(),- getHeight());
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex2f(getWidth(), getHeight());
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex2f(- getWidth(), getHeight());
     glEnd();
     
     glPopMatrix();
@@ -51,7 +60,7 @@ void Player::updatePlayer(){
     if(nextXpos == getXPos() && nextYpos == getYPos() && movementSpeed >= 0){
         movementSpeed -= 0.01;
     }
-    if((nextXpos != getXPos() || nextYpos != getYPos()) &&  movementSpeed < 2){
+    if((nextXpos != getXPos() || nextYpos != getYPos()) &&  movementSpeed < 1.5){
         movementSpeed += 0.15;
     }
     if (movementSpeed < 0) {
@@ -89,6 +98,7 @@ void Player::shootPrimary(float dirXPos, float dirYPos){
         float ydif = getYPos() - dirYPos;
         
         float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
+        setAngle(angle);
         
         Bullet bullet = Bullet(getXPos(), getYPos(), angle, primaryWeaponType,getName());
         bullets.push_back(bullet);
@@ -107,6 +117,7 @@ void Player::shootSecondary(float dirXPos, float dirYPos){
         float ydif = getYPos() - dirYPos;
         
         float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
+        setAngle(angle);
         
         Bullet bullet = Bullet(getXPos(), getYPos(), angle, secondaryWeaponType,getName());
         bullets.push_back(bullet);

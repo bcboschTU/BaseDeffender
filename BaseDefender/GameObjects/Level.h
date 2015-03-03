@@ -17,9 +17,10 @@
 #include "Base.h"
 #include "Turret.h"
 #include "Enemie.h"
+#include "Background.h"
 #include "Explosion.h"
 #include "texture.hpp"
-//#include "QuadTree.h"
+#include "QuadTree.h"
 
 class Level{
 public:
@@ -52,9 +53,13 @@ private:
     std::vector<Turret> turrets;
     std::vector<Enemie> enemies;
     std::vector<Explosion> explosions;
+    Background background = Background(0,0,20,20);
     
     GLuint texture1;
     GLuint texture2;
+    GLuint texture3;
+    GLuint texture4;
+    GLuint texture5;
     std::vector<GLuint> textures;
     std::vector<std::string> textureNamesPosition;
     

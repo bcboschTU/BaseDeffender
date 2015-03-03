@@ -49,15 +49,23 @@ void Enemie::draw(){
         glLoadIdentity();
         glPushMatrix();
         glTranslatef(getXPos(), getYPos(), 0);
-    
-    
-        glBegin(GL_POLYGON);
-        glColor3f(0.0f, 0.0f, 1.0f);
-        for(double i = 0; i < 2 * PI; i += PI / 128){ //<-- Change this Value
-            glVertex3f(cos(i) * getWidth(), sin(i) * getHeight(), 0.0);
-        }
+        glRotated(getAngle()+90, 0.0, 0.0, 1.0);
+        glTranslatef(-getXPos(), -getYPos(), 0);
+        
+        glTranslatef(getXPos(), getYPos(), 0);
+        
+        glBegin(GL_QUADS);              // Each set of 4 vertices form a quad
+        glColor4f(1.0f, 1.0f, 1.0f,1.0f);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex2f(-getWidth(), - getHeight());    // x, y
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex2f(getWidth(),- getHeight());
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex2f(getWidth(), getHeight());
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex2f(- getWidth(), getHeight());
         glEnd();
-    
+        
         glPopMatrix();
     }
 }
@@ -113,7 +121,7 @@ int Enemie::gotHit(std::vector<Bullet*> bullets){
     return hitReturn;
 }
 
-/*
+
 int Enemie::gotHitTree(QuadtreeBullet* quadtree){
     int hitReturn = -1;
     std::vector<Bullet*> bulletsQuadTree = quadtree->GetObjectsAt(xPos, yPos);
@@ -133,7 +141,7 @@ int Enemie::gotHitTree(QuadtreeBullet* quadtree){
     
     return hitReturn;
 }
-*/
+
 
 void Enemie::setTargetPlayer(Player *_target){
     targetType =1 ;
@@ -170,6 +178,7 @@ void Enemie::calculateNewPosPlayer(){
     float ydif = getYPos() - targetPlayer->getYPos();
     
     float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
+    setAngle(angle);
     
     calculateNewPosFinal(angle);
 }

@@ -30,7 +30,7 @@ void Bullet::bulletSetup(){
             width = 0.1;
             height = 0.1;
             speed = 0.2;
-            dmg = 30;
+            dmg = 50;
             break;
         case EXPLOSIVE:
             width = 0.15;

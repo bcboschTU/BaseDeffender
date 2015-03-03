@@ -23,6 +23,7 @@ GameObject::GameObject(std::string _name,
     yPos = _yPos;
     width = _width;
     height = _height;
+    angle = _angle;
     level = _level;
 }
 

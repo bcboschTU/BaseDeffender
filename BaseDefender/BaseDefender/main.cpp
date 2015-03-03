@@ -12,6 +12,7 @@
 #include <libpng16/png.h>
 #include <GLUT/glut.h>
 #include <string>
+#include <sstream>
 
 #include "controls.h"
 #include "Level.h"
@@ -25,6 +26,7 @@ int width = 1100;
 int height = 700;
 int camPosX = 0;
 int camPosY = 0;
+int nbFrames = 0;
 float camPosZ = 0.1;
 
 static void error_callback(int error, const char* description)
@@ -62,6 +64,12 @@ void initGL(int widthR, int heightR)
     glPointSize(1.0f);		// Set a 'chunky' point size
     
     glEnable(GL_POINT_SMOOTH);
+    
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 }
 
 void initGame(){
@@ -95,6 +103,25 @@ void drawScene(){
     
     glfwSwapBuffers(window);
     glfwPollEvents();
+}
+
+void drawFps(GLFWwindow* pWindow){
+    // Measure speed
+    static double lastTimeFps = glfwGetTime();
+    double currentTime = glfwGetTime();
+    double delta = currentTime - lastTimeFps;
+    nbFrames++;
+    if ( delta >= 1.0 ){ // If last cout was more than 1 sec ago
+        double fps = double(nbFrames) / delta;
+        
+        std::stringstream ss;
+        ss << "Base Defender Version 0.1" << " [" << fps << " FPS]";
+        
+        glfwSetWindowTitle(pWindow, ss.str().c_str());
+        
+        nbFrames = 0;
+        lastTimeFps = currentTime;
+    }
 }
 
 
@@ -131,6 +158,7 @@ int main(void)
         camera.computeInputs(window, &level, &gamestate);
         camera.computeInputsMouse(window, &level, &gamestate);
         drawScene();
+        drawFps(window);
     }
     glfwDestroyWindow(window);
     glfwTerminate();

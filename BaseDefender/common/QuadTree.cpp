@@ -8,100 +8,98 @@
 
 #include "QuadTree.h"
 
-QuadtreeBullet::QuadtreeBullet(float _x, float _y, float _width, float _height, int _level, int _maxLevel)
+QuadtreeBullet::QuadtreeBullet(float _x, float _y, float _width, float _height, int _level, int _maxLevel,int _maxObjects)
 {
-    x =_x;
-    y = _y;
-    width = _width;
-    height = _height;
-    level = _level;
-    maxLevel  = _maxLevel;
-    if (level == maxLevel) {
-        return;
-    }
-    
-    NW = new QuadtreeBullet(x, y, width / 2.0f, height / 2.0f, level+1, maxLevel);
-    NE = new QuadtreeBullet(x + width / 2.0f, y, width / 2.0f, height / 2.0f, level+1, maxLevel);
-    SW = new QuadtreeBullet(x, y + height / 2.0f, width / 2.0f, height / 2.0f, level+1, maxLevel);
-    SE = new QuadtreeBullet(x + width / 2.0f, y + height / 2.0f, width / 2.0f, height / 2.0f, level+1, maxLevel);
-}
-
-QuadtreeBullet::~QuadtreeBullet()
-{
-    if (level == maxLevel)
-        return;
-    
-    delete NW;
-    delete NE;
-    delete SW;
-    delete SE;
+    x		=_x;
+    y		=_y;
+    width	=_width;
+    height	=_height;
+    level	=_level;
+    maxLevel=_maxLevel;
+    maxObjects =_maxObjects;
+    nextLevel = false;
+    addedChildern = false;
 }
 
 void QuadtreeBullet::AddObject(Bullet *object) {
-    if (level == maxLevel) {
-        objects.push_back(object);
-        return;
+    if(nextLevel){
+        if (contains(NW, object)) {
+            NW->AddObject(object);
+        } else if (contains(NE, object)) {
+            NE->AddObject(object);
+        } else if (contains(SW, object)) {
+            SW->AddObject(object);
+        } else if (contains(SE, object)) {
+            SE->AddObject(object);
+        }
     }
-    if (contains(NW, object)) {
-        NW->AddObject(object); return;
-    } else if (contains(NE, object)) {
-        NE->AddObject(object); return;
-    } else if (contains(SW, object)) {
-        SW->AddObject(object); return;
-    } else if (contains(SE, object)) {
-        SE->AddObject(object); return;
+    else if(this->objects.size() > maxObjects){
+        if(!addedChildern){
+            NW = new QuadtreeBullet(x, y, width / 2.0f, height / 2.0f, level+1, maxLevel,maxObjects);
+            NE = new QuadtreeBullet(x + width / 2.0f, y, width / 2.0f, height / 2.0f, level+1, maxLevel,maxObjects);
+            SW = new QuadtreeBullet(x, y + height / 2.0f, width / 2.0f, height / 2.0f, level+1, maxLevel,maxObjects);
+            SE = new QuadtreeBullet(x + width / 2.0f, y + height / 2.0f, width / 2.0f, height / 2.0f, level+1,  maxLevel,maxObjects);
+            addedChildern = true;
+        }
+        
+        //distribute objects over the quadrands
+        for(Bullet* bullet: objects){
+            if (contains(NW, bullet)) {
+                NW->AddObject(bullet);
+            } else if (contains(NE, bullet)) {
+                NE->AddObject(bullet);
+            } else if (contains(SW, bullet)) {
+                SW->AddObject(bullet);
+            } else if (contains(SE, bullet)) {
+                SE->AddObject(bullet);
+            }
+        }
+        objects.clear();
+        
+        if (contains(NW, object)) {
+            NW->AddObject(object);
+        } else if (contains(NE, object)) {
+            NE->AddObject(object);
+        } else if (contains(SW, object)) {
+            SW->AddObject(object);
+        } else if (contains(SE, object)) {
+            SE->AddObject(object);
+        }
+        nextLevel = true;
     }
-    if (contains(this, object)) {
+    else{
         objects.push_back(object);
     }
 }
 
 std::vector<Bullet*> QuadtreeBullet::GetObjectsAt(float _x, float _y) {
-    if (level == maxLevel) {
+    std::vector<Bullet*> returnObjects, childReturnObjects;
+    if(nextLevel){
+        if (_x > x + width / 2.0f && _x < x + width) {
+            if (_y > y + height / 2.0f && _y < y + height) {
+                return SE->GetObjectsAt(_x, _y);
+            } else if (_y > y && _y <= y + height / 2.0f) {
+                return NE->GetObjectsAt(_x, _y);
+            }
+        } else if (_x > x && _x <= x + width / 2.0f) {
+            if (_y > y + height / 2.0f && _y < y + height) {
+                return SW->GetObjectsAt(_x, _y);
+            } else if (_y > y && _y <= y + height / 2.0f) {
+                return NW->GetObjectsAt(_x, _y);
+            }
+        }
+        return returnObjects;
+    }
+    else{
         return objects;
     }
     
-    std::vector<Bullet*> returnObjects, childReturnObjects;
-    if (!objects.empty()) {
-        returnObjects = objects;
+    /*
+    if (objects.size() > 0) {
+        return objects;
+        //returnObjects = objects;
     }
-    if (_x > x + width / 2.0f && _x < x + width) {
-        if (_y > y + height / 2.0f && _y < y + height) {
-            childReturnObjects = SE->GetObjectsAt(_x, _y);
-            returnObjects.insert(returnObjects.end(), childReturnObjects.begin(), childReturnObjects.end());
-            return returnObjects;
-        } else if (_y > y && _y <= y + height / 2.0f) {
-            childReturnObjects = NE->GetObjectsAt(_x, _y);
-            returnObjects.insert(returnObjects.end(), childReturnObjects.begin(), childReturnObjects.end());
-            return returnObjects;
-        }
-    } else if (_x > x && _x <= x + width / 2.0f) {
-        if (_y > y + height / 2.0f && _y < y + height) {
-            childReturnObjects = SW->GetObjectsAt(_x, _y);
-            returnObjects.insert(returnObjects.end(), childReturnObjects.begin(), childReturnObjects.end());
-            return returnObjects;
-        } else if (_y > y && _y <= y + height / 2.0f) {
-            childReturnObjects = NW->GetObjectsAt(_x, _y);
-            returnObjects.insert(returnObjects.end(), childReturnObjects.begin(), childReturnObjects.end());
-            return returnObjects;
-        }
-    }
-    return returnObjects;
-}
-
-void QuadtreeBullet::Clear() {
-    if (level == maxLevel) {
-        objects.clear();
-        return;
-    } else {
-        NW->Clear();
-        NE->Clear();
-        SW->Clear();
-        SE->Clear();
-    }
-    if (!objects.empty()) {
-        objects.clear();
-    }
+     */
 }
 
 bool QuadtreeBullet::contains(QuadtreeBullet *child, Bullet *object) {
@@ -116,16 +114,14 @@ bool QuadtreeBullet::contains(QuadtreeBullet *child, Bullet *object) {
 }
 
 void QuadtreeBullet::empty(){
-    if (level == maxLevel) {
+    if (!nextLevel) {
         objects.clear();
         return;
     } else {
+        nextLevel = false;
         NW->empty();
         NE->empty();
         SW->empty();
         SE->empty();
-    }
-    if (!objects.empty()) {
-        objects.clear();
     }
 }

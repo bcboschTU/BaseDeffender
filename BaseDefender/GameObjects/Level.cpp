@@ -7,13 +7,13 @@
 //
 
 #include "Level.h"
-
-Level::Level():quadtree(QuadtreeBullet( 0.0f, 0.0f, 25.0f, 20.0f, 0, 4 )){
+//QuadtreeBullet quadtree = QuadtreeBullet( -10.0f, -10.0f, 20.0f, 20.0f, 0, 10, 3 );
+Level::Level(){
 
 }
 
 
-Level::Level(int _type):quadtree(QuadtreeBullet( 0.0f, 0.0f, 25.0f, 20.0f, 0, 4 )){
+Level::Level(int _type){
     type = _type;
     loadLevel();
     pause = false;
@@ -126,17 +126,15 @@ void Level::drawLevel(){
 void Level::updateLevel(){
     checkIfGameOver();
     //clear all the bullets from last frame
-    if(bullets.size() > 0){
-        bullets.clear();
-        quadtree.empty();
-    }
+
+    bullets.clear();
+    //quadtree.empty();
     //get all bullets:
     getBullets();
     
     
     //check if a bullet hits anything
     checkIfBulletsHit();
-    
     //check if a enemy hits a player or a turret
     checkIfEnemieHit();
     
@@ -175,7 +173,7 @@ void Level::getBullets(){
         std::vector<Bullet> *tempBullets = player->getBullets();
         for(int j = 0; j<tempBullets->size(); j++){
             bullets.push_back(&tempBullets->at(j));
-            quadtree.AddObject(&tempBullets->at(j));
+            //quadtree.AddObject(&tempBullets->at(j));
         }
     }
     
@@ -184,7 +182,7 @@ void Level::getBullets(){
         std::vector<Bullet> *tempBullets = turret->getBullets();
         for(int j = 0; j<tempBullets->size(); j++){
             bullets.push_back(&tempBullets->at(j));
-            quadtree.AddObject(&tempBullets->at(j));
+            //quadtree.AddObject(&tempBullets->at(j));
         }
     }
     
@@ -198,7 +196,8 @@ void Level::checkIfBulletsHit(){
     
     for (int i = 0; i<enemies.size(); i++) {
         Enemie * enemie = &enemies[i];
-        int bulletHit = enemie->gotHit(&quadtree);
+        int bulletHit = enemie->gotHit(bullets);
+        //int bulletHit = enemie->gotHitTree(&quadtree);
         if(bulletHit != -1){
             Bullet *bullet = bullets[bulletHit];
             generateExplosionBullet(bullet->getXPos(), bullet->getYPos(),bullet->getType());
@@ -272,7 +271,7 @@ float Level::rand_FloatRange(float a, float b, bool between){
 void Level::generateEnemies(){
     double currentTime = glfwGetTime();
     float deltaTime = float(currentTime - lastTimeLevel);
-    if(deltaTime > 0.01 && enemies.size() < 500){
+    if(deltaTime > 0.05 && enemies.size() < 1000){
         for(int i = 0; i< 2; i++){
             float xPos = rand_FloatRange(-10,10, true);
             float yPos = rand_FloatRange(-10,10, false);

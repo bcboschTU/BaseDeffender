@@ -95,7 +95,7 @@ void Enemie::updateEnemie(){
     setYPos(nextYpos);
 }
 
-/*
+
 int Enemie::gotHit(std::vector<Bullet*> bullets){
     int hitReturn = -1;
     for (int i = 0; i< bullets.size(); i++) {
@@ -112,9 +112,9 @@ int Enemie::gotHit(std::vector<Bullet*> bullets){
     }
     return hitReturn;
 }
- */
 
-int Enemie::gotHit(QuadtreeBullet* quadtree){
+/*
+int Enemie::gotHitTree(QuadtreeBullet* quadtree){
     int hitReturn = -1;
     std::vector<Bullet*> bulletsQuadTree = quadtree->GetObjectsAt(xPos, yPos);
 
@@ -126,14 +126,14 @@ int Enemie::gotHit(QuadtreeBullet* quadtree){
             hp = hp - bullet->getDmg();
             movementSpeed = 0;
             //bullet set on destroyed;
-            //bullet->setDestroyed(true);
+            bullet->setDestroyed(true);
             hitReturn = i;
         }
     }
     
     return hitReturn;
 }
-
+*/
 
 void Enemie::setTargetPlayer(Player *_target){
     targetType =1 ;

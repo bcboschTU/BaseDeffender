@@ -15,31 +15,28 @@
 
 class QuadtreeBullet {
 public:
-    QuadtreeBullet(float x, float y, float width, float height, int level, int maxLevel);
-    
-    ~QuadtreeBullet();
-    
-    void					AddObject(Bullet *object);
-    std::vector<Bullet*>	GetObjectsAt(float x, float y);
-    void					Clear();
-    void                    empty();
+    QuadtreeBullet(float x, float y, float width, float height, int level, int maxLevel, int maxObjects);
+    void AddObject(Bullet *object);
+    std::vector<Bullet*> GetObjectsAt(float x, float y);
+    void empty();
     
 private:
-    float					x;
-    float					y;
-    float					width;
-    float					height;
-    int                     level;
-    int                     maxLevel;
-    std::vector<Bullet*>	objects;
-    
-    QuadtreeBullet *		parent;
-    QuadtreeBullet *		NW;
-    QuadtreeBullet *		NE;
-    QuadtreeBullet *		SW;
-    QuadtreeBullet *		SE;
-    
-    bool					contains(QuadtreeBullet *child, Bullet *object);
+    float x;
+    float y;
+    float width;
+    float height;
+    int level;
+    int maxLevel;
+    int maxObjects;
+    bool nextLevel;
+    bool addedChildern;
+    std::vector<Bullet*> objects;
+    QuadtreeBullet * parent;
+    QuadtreeBullet * NW;
+    QuadtreeBullet * NE;
+    QuadtreeBullet * SW;
+    QuadtreeBullet * SE;
+    bool contains(QuadtreeBullet *child, Bullet *object);
 };
 
 

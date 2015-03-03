@@ -19,7 +19,7 @@
 #include "Enemie.h"
 #include "Explosion.h"
 #include "texture.hpp"
-#include "QuadTree.h"
+//#include "QuadTree.h"
 
 class Level{
 public:
@@ -47,15 +47,11 @@ private:
     int type;
 
     std::vector<Player> players;
-    
-    
     std::vector<Bullet*> bullets;
-    
     std::vector<Base> bases;
     std::vector<Turret> turrets;
     std::vector<Enemie> enemies;
     std::vector<Explosion> explosions;
-    QuadtreeBullet quadtree;
     
     GLuint texture1;
     GLuint texture2;

@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "Player.h"
 #include "Base.h"
+#include "QuadTree.h"
 
 class Enemie{
 public:
@@ -25,10 +26,12 @@ public:
            int _level);
     void draw();
     void updateEnemie();
-    void gotHit(std::vector<Bullet*> bullets);
+    //int gotHit(std::vector<Bullet*> bullets);
+    int gotHit(QuadtreeBullet* quadtree);
     void calculateNewPos();
     void calculateNewPosPlayer();
     void calculateNewPosBase();
+    void calculateNewPosFinal(float angle);
     std::string getName();
     void setName(std::string _name);
     int getHp();

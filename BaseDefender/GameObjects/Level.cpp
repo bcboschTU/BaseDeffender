@@ -8,12 +8,12 @@
 
 #include "Level.h"
 
-Level::Level(){
-    
+Level::Level():quadtree(QuadtreeBullet( 0.0f, 0.0f, 25.0f, 20.0f, 0, 4 )){
+
 }
 
 
-Level::Level(int _type){
+Level::Level(int _type):quadtree(QuadtreeBullet( 0.0f, 0.0f, 25.0f, 20.0f, 0, 4 )){
     type = _type;
     loadLevel();
     pause = false;
@@ -96,6 +96,11 @@ void Level::drawLevel(){
         bullet->draw();
     }
     
+    for (int i = 0; i<explosions.size(); i++) {
+        Explosion *explosion = &explosions[i];
+        explosion->draw();
+    }
+    
     
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture2);
@@ -121,7 +126,10 @@ void Level::drawLevel(){
 void Level::updateLevel(){
     checkIfGameOver();
     //clear all the bullets from last frame
-    bullets.clear();
+    if(bullets.size() > 0){
+        bullets.clear();
+        quadtree.empty();
+    }
     //get all bullets:
     getBullets();
     
@@ -133,6 +141,8 @@ void Level::updateLevel(){
     checkIfEnemieHit();
     
     generateEnemies();
+    
+    updateExplosions();
     
     //update player
     for (int i = 0; i<players.size(); i++) {
@@ -152,6 +162,11 @@ void Level::updateLevel(){
         Turret *turret = &turrets[i];
         turret->setTarget(&enemies);
     }
+    
+    for(int i = 0; i<explosions.size(); i++){
+        Explosion * explosion = &explosions[i];
+        explosion->updateExplosion();
+    }
 }
 
 void Level::getBullets(){
@@ -160,6 +175,7 @@ void Level::getBullets(){
         std::vector<Bullet> *tempBullets = player->getBullets();
         for(int j = 0; j<tempBullets->size(); j++){
             bullets.push_back(&tempBullets->at(j));
+            quadtree.AddObject(&tempBullets->at(j));
         }
     }
     
@@ -168,6 +184,7 @@ void Level::getBullets(){
         std::vector<Bullet> *tempBullets = turret->getBullets();
         for(int j = 0; j<tempBullets->size(); j++){
             bullets.push_back(&tempBullets->at(j));
+            quadtree.AddObject(&tempBullets->at(j));
         }
     }
     
@@ -181,7 +198,11 @@ void Level::checkIfBulletsHit(){
     
     for (int i = 0; i<enemies.size(); i++) {
         Enemie * enemie = &enemies[i];
-        enemie->gotHit(bullets);
+        int bulletHit = enemie->gotHit(&quadtree);
+        if(bulletHit != -1){
+            Bullet *bullet = bullets[bulletHit];
+            generateExplosionBullet(bullet->getXPos(), bullet->getYPos(),bullet->getType());
+        }
         //check if enemie is hit by a bullet
     }
     
@@ -220,9 +241,7 @@ void Level::updateEnemieVector(){
         Enemie* enemie = &enemies[i];
         if(enemie->getHp() <= 0){
             //add explosion:
-            //Explosion explosion = Explosion(enemie->getXPos(),enemie->getYPos());
-            //explosions.push_back(explosion);
-            
+            generateExplosion(enemie->getXPos(), enemie->getYPos(), MEDIUM);
             //remove enemie from enemies;
             enemies.erase(enemies.begin() + i);
             
@@ -248,18 +267,18 @@ float Level::rand_FloatRange(float a, float b, bool between){
     else{
         return randomValue;
     }
-    
 }
 
 void Level::generateEnemies(){
     double currentTime = glfwGetTime();
     float deltaTime = float(currentTime - lastTimeLevel);
-    if(deltaTime > 0.01){
+    if(deltaTime > 0.01 && enemies.size() < 500){
         for(int i = 0; i< 2; i++){
             float xPos = rand_FloatRange(-10,10, true);
             float yPos = rand_FloatRange(-10,10, false);
-            Enemie enemie = Enemie("enemie", 50, xPos, yPos, 0.2, 0.2, 0, 1);
+            Enemie enemie = Enemie("enemie", 10, xPos, yPos, 0.2, 0.2, 0, 1);
             enemie.setTargetPlayer(&players[0]);
+            //enemie.setTargetBase(&bases[0]);
             enemies.push_back(enemie);
             lastTimeLevel = currentTime;
         }
@@ -302,7 +321,6 @@ void Level::resetLevel(){
 }
 
 void Level::loadTextures(){
-    std::cout << "load textures \n";
     texture1 = loadPng("/Users/bertbosch/Documents/delft/game/BaseDeffender/BaseDefender/Textures/base.png");
     texture2 = loadPng("/Users/bertbosch/Documents/delft/game/BaseDeffender/BaseDefender/Textures/tank_turret.png");
 }
@@ -313,5 +331,26 @@ void Level::renderString(float x, float y, void *font, const std::string &string
     glRasterPos2f(x, y);
     for (int n=0; n<string.size(); ++n) {
         glutBitmapCharacter(font, string[n]);
+    }
+}
+
+void Level::generateExplosionBullet(float _xPos, float _yPos, WeaponType _weaponType){
+    if (_weaponType == NORMAL) {
+        generateExplosion(_xPos,_yPos,SMALL);
+    }
+}
+
+void Level::generateExplosion(float _xPos, float _yPos, ExplosionType _type){
+    Explosion explosion = Explosion(_xPos,_yPos,_type);
+    explosions.push_back(explosion);
+}
+
+void Level::updateExplosions(){
+    for (int i = 0; i<explosions.size(); i++) {
+        Explosion* explosion = &explosions[i];
+        if(explosion->getDestroyed()){
+            explosions.erase(explosions.begin() + i);
+            
+        }
     }
 }

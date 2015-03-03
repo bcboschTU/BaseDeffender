@@ -27,6 +27,7 @@
 		D3C220DF1AA4B91900ABF36D /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C220DD1AA4B91900ABF36D /* Button.cpp */; };
 		D3C220E31AA4C19100ABF36D /* base.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3C220E11AA4C18A00ABF36D /* base.png */; };
 		D3C220E41AA4C19100ABF36D /* tank_turret.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3C220E21AA4C18A00ABF36D /* tank_turret.png */; };
+		D3E8BED11AA616BB00D689B5 /* QuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3E8BECF1AA616BB00D689B5 /* QuadTree.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -328,6 +329,8 @@
 		D3C220DE1AA4B91900ABF36D /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Button.h; path = Menu/Button.h; sourceTree = "<group>"; };
 		D3C220E11AA4C18A00ABF36D /* base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = base.png; path = Textures/base.png; sourceTree = "<group>"; };
 		D3C220E21AA4C18A00ABF36D /* tank_turret.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tank_turret.png; path = Textures/tank_turret.png; sourceTree = "<group>"; };
+		D3E8BECF1AA616BB00D689B5 /* QuadTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QuadTree.cpp; path = common/QuadTree.cpp; sourceTree = "<group>"; };
+		D3E8BED01AA616BB00D689B5 /* QuadTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuadTree.h; path = common/QuadTree.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -671,6 +674,8 @@
 				D3C220AC1AA22C5900ABF36D /* controls.h */,
 				D3C220CF1AA25E3B00ABF36D /* GameState.cpp */,
 				D3C220D01AA25E3B00ABF36D /* GameState.h */,
+				D3E8BECF1AA616BB00D689B5 /* QuadTree.cpp */,
+				D3E8BED01AA616BB00D689B5 /* QuadTree.h */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -803,6 +808,7 @@
 				D3C220D11AA25E3B00ABF36D /* GameState.cpp in Sources */,
 				D3C220DF1AA4B91900ABF36D /* Button.cpp in Sources */,
 				D3C220CC1AA22E0300ABF36D /* Bullet.cpp in Sources */,
+				D3E8BED11AA616BB00D689B5 /* QuadTree.cpp in Sources */,
 				D3C220D41AA2702100ABF36D /* Base.cpp in Sources */,
 				D3C220C01AA22DC200ABF36D /* Level.cpp in Sources */,
 				D3C220C31AA22DDA00ABF36D /* Player.cpp in Sources */,

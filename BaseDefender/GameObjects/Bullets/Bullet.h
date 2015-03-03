@@ -40,6 +40,7 @@ public:
     float getYPos();
     float getWidth();
     int getDmg();
+    WeaponType getType();
 private:
     float xPos;
     float yPos;

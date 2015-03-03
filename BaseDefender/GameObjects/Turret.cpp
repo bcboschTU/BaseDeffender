@@ -21,7 +21,7 @@ Turret::Turret(std::string _name,
     rangeBegin = _rangeBegin;
     rangeEnd = _rangeEnd;
     weaponType = NORMAL;
-    fireRate = 0.01;
+    fireRate = 0.05;
     range = 5;
     lastTime = glfwGetTime();
 }

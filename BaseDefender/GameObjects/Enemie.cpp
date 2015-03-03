@@ -95,17 +95,43 @@ void Enemie::updateEnemie(){
     setYPos(nextYpos);
 }
 
-void Enemie::gotHit(std::vector<Bullet*> bullets){
+/*
+int Enemie::gotHit(std::vector<Bullet*> bullets){
+    int hitReturn = -1;
     for (int i = 0; i< bullets.size(); i++) {
         Bullet* bullet = bullets[i];
         float distance = calculateDistance(xPos, bullet->getXPos(), yPos, bullet->getYPos());
         float hitDistance = width + bullet->getWidth();
         if(distance < hitDistance){
             hp = hp - bullet->getDmg();
+            movementSpeed = 0;
             //bullet set on destroyed;
             bullet->setDestroyed(true);
+            hitReturn = i;
         }
     }
+    return hitReturn;
+}
+ */
+
+int Enemie::gotHit(QuadtreeBullet* quadtree){
+    int hitReturn = -1;
+    std::vector<Bullet*> bulletsQuadTree = quadtree->GetObjectsAt(xPos, yPos);
+
+    for (int i = 0; i< bulletsQuadTree.size(); i++) {        
+        Bullet* bullet = bulletsQuadTree[i];
+        float distance = calculateDistance(xPos, bullet->getXPos(), yPos, bullet->getYPos());
+        float hitDistance = width + bullet->getWidth();
+        if(distance < hitDistance){
+            hp = hp - bullet->getDmg();
+            movementSpeed = 0;
+            //bullet set on destroyed;
+            //bullet->setDestroyed(true);
+            hitReturn = i;
+        }
+    }
+    
+    return hitReturn;
 }
 
 
@@ -145,11 +171,7 @@ void Enemie::calculateNewPosPlayer(){
     
     float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
     
-    nextXpos = getXPos() + cosf(angle * PI/180)  * 0.02;
-    nextYpos = getYPos() + sinf(angle * PI/180)  * 0.02;
-    
-    //nextXpos = nextXpos;
-    //nextYpos = nextYpos;
+    calculateNewPosFinal(angle);
 }
 
 void Enemie::calculateNewPosBase(){
@@ -157,6 +179,17 @@ void Enemie::calculateNewPosBase(){
     nextYpos = targetBase->getYPos();
     
     //normalise next pos
+    float xdif = getXPos() - targetBase->getXPos();
+    float ydif = getYPos() - targetBase->getYPos();
+    
+    float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
+    
+    calculateNewPosFinal(angle);
+}
+
+void Enemie::calculateNewPosFinal(float angle){
+    nextXpos = getXPos() + cosf(angle * PI/180)  * 0.02;
+    nextYpos = getYPos() + sinf(angle * PI/180)  * 0.02;
 }
 
 

@@ -17,11 +17,12 @@ Turret::Turret(std::string _name,
                float _angle,
                int _level,
                float _rangeBegin,
-               float _rangeEnd):GameObject(_name,_hp,_xPos,_yPos,_width,_height,_angle,_level){
+               float _rangeEnd,
+               WeaponType _weaponType):GameObject(_name,_hp,_xPos,_yPos,_width,_height,_angle,_level){
     rangeBegin = _rangeBegin;
     rangeEnd = _rangeEnd;
-    weaponType = NORMAL;
-    fireRate = 0.03;
+    weaponType = _weaponType;
+    fireRate = 0.1;
     range = 5;
     lastTime = glfwGetTime();
 }
@@ -65,6 +66,21 @@ void Turret::draw(){
 void Turret::updateTurret(){
 
 }
+
+void Turret::levelUpWeapon(){
+    int weaponTypeNext = (int)weaponType;
+    weaponType = WeaponType(weaponTypeNext +1);
+}
+void Turret::levelUpRange(){
+    
+}
+void Turret::levelUpFireRate(){
+    
+}
+void Turret::levelUp(){
+    
+}
+
 
 void Turret::shoot(float dirXPos, float dirYPos){
     float currentTime = glfwGetTime();

@@ -39,9 +39,23 @@ void Base::draw(){
     glPopMatrix();
 }
 
+bool Base::getHitByEnemie(float enemieXPos, float enemieYPos, float enemieWidth, int dmg){
+    float distance = calculateDistance(getXPos(), enemieXPos, getYPos(), enemieYPos);
+    float hitDistance = getWidth() + enemieWidth;
+    if(distance < hitDistance){
+        setHp(getHp()- dmg);
+        return true;
+    }
+    return false;
+}
+
 float Base::getXPos(){
     return GameObject::getXPos();
 }
 float Base::getYPos(){
     return GameObject::getYPos();
+}
+
+int Base::getHp(){
+    return GameObject::getHp();
 }

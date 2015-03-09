@@ -24,6 +24,8 @@ public:
     void draw();
     float getXPos();
     float getYPos();
+    int getHp();
+    bool getHitByEnemie(float enemieXPos, float enemieYPos, float enemieWidth, int dmg);
 private:
     
 };

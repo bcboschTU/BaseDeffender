@@ -12,6 +12,10 @@
 #include <stdio.h>
 #include <vector>
 #include <GLUT/glut.h>
+#include <pthread.h>
+
+#include "tiny_obj_loader.h"
+
 #include "Bullet.h"
 #include "Player.h"
 #include "Base.h"
@@ -25,13 +29,17 @@
 class Level{
 public:
     Level();
-    Level(int type);
+    Level(int type, int width, int height);
     void loadLevel();
     void drawLevel();
+    void drawHud();
     void updateLevel();
     void getBullets();
     void checkIfBulletsHit();
+    void checkIfBulletsHitEnemy(int begin, int end);
     void checkIfEnemieHit();
+    void checkRoundUpdate();
+    void checkMultiplerScore();
     void updateEnemieVector();
     void generateEnemies();
     Player* getPlayer(int i);
@@ -40,10 +48,16 @@ public:
     void checkIfGameOver();
     void resetLevel();
     void loadTextures();
+    void loadModels();
     void renderString(float x, float y, void *font, const std::string &string);
     void generateExplosionBullet(float _xPos, float _yPos, WeaponType _weaponType);
     void generateExplosion(float _xPos, float _yPos, ExplosionType _explosionType);
     void updateExplosions();
+    
+    void setWidth(int _width);
+    void setHeight(int _height);
+    
+    void roundStart(int round);
 private:
     int type;
 
@@ -66,6 +80,21 @@ private:
     bool pause;
     float lastTimePause;
     float lastTimeLevel;
+    
+    int score;
+    int multiplier;
+    int multiplierBaseScore;
+    int round;
+    bool roundStartStop;
+    bool roundStartShowText;
+    float roundStartShowTextTimer;
+    float roundStartShowTextTime;
+    int enemyAmount;
+    float enemySpawnRate;
+    float enemySpawnLoop;
+    
+    int width;
+    int height;
     
 };
 

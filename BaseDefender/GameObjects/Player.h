@@ -27,6 +27,7 @@ public:
     void updatePlayer();
     void shootPrimary(float dirXPos, float dirYPos);
     void shootSecondary(float dirXPos, float dirYPos);
+    void updateAngleMousePos(float dirXPos, float dirYPos);
     std::vector<Bullet>* getBullets();
     float getFireRatePrimary();
     

@@ -126,6 +126,14 @@ void Player::shootSecondary(float dirXPos, float dirYPos){
     }
 }
 
+void Player::updateAngleMousePos(float dirXPos, float dirYPos){
+    float xdif = getXPos() - dirXPos;
+    float ydif = getYPos() - dirYPos;
+    
+    float angle = (atan2(ydif, xdif) * 180.0 / PI) + 180;
+    setAngle(angle);
+}
+
 std::vector<Bullet> *Player::getBullets(){
     updateBullets();
     

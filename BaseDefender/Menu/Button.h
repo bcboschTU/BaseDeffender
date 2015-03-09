@@ -11,4 +11,12 @@
 
 #include <stdio.h>
 
+class Button{
+public:
+    Button();
+public:
+    
+    
+};
+
 #endif /* defined(__BaseDefender__Button__) */

@@ -105,14 +105,12 @@ void Camera::computeInputsGameMouse(GLFWwindow* window,Level *level,GameState* g
         glm::vec3 worldPos = getMouseWorldPos(window);
         player->shootPrimary(worldPos[0], worldPos[1]);
     }
-    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS){
+    else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS){
         glm::vec3 worldPos = getMouseWorldPos(window);
         player->shootSecondary(worldPos[0], worldPos[1]);
     }
-    
-    
-    
-    
+    glm::vec3 worldPos = getMouseWorldPos(window);
+    player->updateAngleMousePos(worldPos[0],worldPos[1]);
 }
 
 void Camera::computeInputsMenu(GLFWwindow* window,Level *level,GameState* gamestate){

@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		D3337A4C1AA6512D00A63E52 /* Background.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3337A4A1AA6512D00A63E52 /* Background.cpp */; };
+		D3A5C0441AA89CCD009EE171 /* tiny_obj_loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = D3A5C0421AA89CCD009EE171 /* tiny_obj_loader.cc */; };
+		D3A5C0481AA89DB2009EE171 /* T_34_85.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3A5C0461AA89DA1009EE171 /* T_34_85.obj */; };
+		D3A5C0491AA89DB2009EE171 /* T29.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3A5C0471AA89DA1009EE171 /* T29.obj */; };
+		D3A5C04B1AA89DFC009EE171 /* cube.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3A5C04A1AA89DF1009EE171 /* cube.obj */; };
+		D3A5C04C1AA89E3C009EE171 /* background4.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D30931E81AA718C900D1A713 /* background4.png */; };
+		D3A5C04D1AA89E3C009EE171 /* background2.PNG in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3337A501AA66FE200A63E52 /* background2.PNG */; };
+		D3A5C04E1AA89E3C009EE171 /* tank1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3337A511AA66FE200A63E52 /* tank1.png */; };
+		D3A5C04F1AA89E3C009EE171 /* player.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3337A4F1AA66AE200A63E52 /* player.png */; };
+		D3A5C0501AA89E3C009EE171 /* background1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3337A4E1AA66A3B00A63E52 /* background1.png */; };
 		D3C21F9E1AA2238400ABF36D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C21F9D1AA2238400ABF36D /* main.cpp */; };
 		D3C21FA51AA2238E00ABF36D /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C21FA41AA2238E00ABF36D /* GLUT.framework */; };
 		D3C21FA71AA2239200ABF36D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C21FA61AA2239200ABF36D /* OpenGL.framework */; };
@@ -34,24 +43,38 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		D3C21F981AA2238400ABF36D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = usr/share/man/man1;
+			buildActionMask = 12;
+			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				D3A5C04C1AA89E3C009EE171 /* background4.png in CopyFiles */,
+				D3A5C04D1AA89E3C009EE171 /* background2.PNG in CopyFiles */,
+				D3A5C04E1AA89E3C009EE171 /* tank1.png in CopyFiles */,
+				D3A5C04F1AA89E3C009EE171 /* player.png in CopyFiles */,
+				D3A5C0501AA89E3C009EE171 /* background1.png in CopyFiles */,
+				D3A5C04B1AA89DFC009EE171 /* cube.obj in CopyFiles */,
+				D3A5C0481AA89DB2009EE171 /* T_34_85.obj in CopyFiles */,
+				D3A5C0491AA89DB2009EE171 /* T29.obj in CopyFiles */,
 				D3C220E31AA4C19100ABF36D /* base.png in CopyFiles */,
 				D3C220E41AA4C19100ABF36D /* tank_turret.png in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D30931E81AA718C900D1A713 /* background4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background4.png; path = Textures/background4.png; sourceTree = "<group>"; };
 		D3337A4A1AA6512D00A63E52 /* Background.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Background.cpp; path = Background/Background.cpp; sourceTree = "<group>"; };
 		D3337A4B1AA6512D00A63E52 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Background.h; path = Background/Background.h; sourceTree = "<group>"; };
 		D3337A4E1AA66A3B00A63E52 /* background1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background1.png; path = Textures/background1.png; sourceTree = "<group>"; };
 		D3337A4F1AA66AE200A63E52 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = player.png; path = Textures/player.png; sourceTree = "<group>"; };
 		D3337A501AA66FE200A63E52 /* background2.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background2.PNG; path = Textures/background2.PNG; sourceTree = "<group>"; };
 		D3337A511AA66FE200A63E52 /* tank1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tank1.png; path = Textures/tank1.png; sourceTree = "<group>"; };
+		D3A5C0421AA89CCD009EE171 /* tiny_obj_loader.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tiny_obj_loader.cc; sourceTree = "<group>"; };
+		D3A5C0431AA89CCD009EE171 /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
+		D3A5C0461AA89DA1009EE171 /* T_34_85.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = T_34_85.obj; path = Models/T_34_85.obj; sourceTree = "<group>"; };
+		D3A5C0471AA89DA1009EE171 /* T29.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = T29.obj; path = Models/T29.obj; sourceTree = "<group>"; };
+		D3A5C04A1AA89DF1009EE171 /* cube.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
 		D3C21F9A1AA2238400ABF36D /* BaseDefender */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BaseDefender; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3C21F9D1AA2238400ABF36D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D3C21FA41AA2238E00ABF36D /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -364,6 +387,16 @@
 			name = Background;
 			sourceTree = "<group>";
 		};
+		D3A5C0451AA89D70009EE171 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D3A5C04A1AA89DF1009EE171 /* cube.obj */,
+				D3A5C0461AA89DA1009EE171 /* T_34_85.obj */,
+				D3A5C0471AA89DA1009EE171 /* T29.obj */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		D3C21F911AA2238400ABF36D = {
 			isa = PBXGroup;
 			children = (
@@ -373,6 +406,7 @@
 				D3C21FA41AA2238E00ABF36D /* GLUT.framework */,
 				D3C21FAC1AA22B9E00ABF36D /* glm */,
 				D3C220E01AA4C11300ABF36D /* Textures */,
+				D3A5C0451AA89D70009EE171 /* Models */,
 				D3C220D91AA4B8E500ABF36D /* Menu */,
 				D3C220BA1AA22D9B00ABF36D /* GameObjects */,
 				D3C220AA1AA22BFB00ABF36D /* common */,
@@ -692,6 +726,8 @@
 				D3C220D01AA25E3B00ABF36D /* GameState.h */,
 				D3E8BECF1AA616BB00D689B5 /* QuadTree.cpp */,
 				D3E8BED01AA616BB00D689B5 /* QuadTree.h */,
+				D3A5C0421AA89CCD009EE171 /* tiny_obj_loader.cc */,
+				D3A5C0431AA89CCD009EE171 /* tiny_obj_loader.h */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -758,6 +794,7 @@
 		D3C220E01AA4C11300ABF36D /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				D30931E81AA718C900D1A713 /* background4.png */,
 				D3337A501AA66FE200A63E52 /* background2.PNG */,
 				D3337A511AA66FE200A63E52 /* tank1.png */,
 				D3337A4F1AA66AE200A63E52 /* player.png */,
@@ -831,6 +868,7 @@
 				D3C220CC1AA22E0300ABF36D /* Bullet.cpp in Sources */,
 				D3E8BED11AA616BB00D689B5 /* QuadTree.cpp in Sources */,
 				D3C220D41AA2702100ABF36D /* Base.cpp in Sources */,
+				D3A5C0441AA89CCD009EE171 /* tiny_obj_loader.cc in Sources */,
 				D3C220C01AA22DC200ABF36D /* Level.cpp in Sources */,
 				D3C220C31AA22DDA00ABF36D /* Player.cpp in Sources */,
 				D3C220C61AA22DE600ABF36D /* Turret.cpp in Sources */,

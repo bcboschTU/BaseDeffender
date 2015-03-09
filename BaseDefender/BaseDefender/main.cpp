@@ -73,12 +73,28 @@ void initGL(int widthR, int heightR)
 }
 
 void initGame(){
-    level = Level(0);
+    level = Level(0, width,height);
     gamestate.setGameState(1);
 }
 
 void drawLevel(){
     level.drawLevel();
+}
+
+void drawHud(){
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0, width, height, 0.0, -1.0, 10.0);
+    glMatrixMode(GL_MODELVIEW);
+    //glPushMatrix();        ----Not sure if I need this
+    glLoadIdentity();
+    glDisable(GL_CULL_FACE);
+    
+    glClear(GL_DEPTH_BUFFER_BIT);
+    
+    level.drawHud();
+
+    
 }
 
 void drawScene(){
@@ -100,10 +116,13 @@ void drawScene(){
     glLoadIdentity();
     
     drawLevel();
+    drawHud();
     
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
+
+
 
 void drawFps(GLFWwindow* pWindow){
     // Measure speed

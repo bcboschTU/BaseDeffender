@@ -18,6 +18,7 @@
 #include <cmath>
 
 #include "Bullet.h"
+#include "tiny_obj_loader.h"
 
 class GameObject{
 public:

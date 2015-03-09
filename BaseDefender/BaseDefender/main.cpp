@@ -28,6 +28,8 @@ int camPosX = 0;
 int camPosY = 0;
 int nbFrames = 0;
 float camPosZ = 0.1;
+//int rotate = 0;
+
 
 static void error_callback(int error, const char* description)
 {
@@ -66,10 +68,18 @@ void initGL(int widthR, int heightR)
     glEnable(GL_POINT_SMOOTH);
     
     
+    
+    
     glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     // When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    
+    
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    
+
 }
 
 void initGame(){
@@ -109,7 +119,8 @@ void drawScene(){
     glOrtho(-1, 1, -1 * (GLfloat) height / (GLfloat) width, (GLfloat) height/ (GLfloat) width, -100, 100);
     
     glScaled(camera.getPosition().z, camera.getPosition().z, 1);
-    //glRotated(20, 1.0, 0, 0);
+    glRotated(30, 1.0, 0, 0);
+    //rotate += 1;
     glTranslatef(camera.getPosition().x, camera.getPosition().y, 0);
     
     glMatrixMode(GL_MODELVIEW);
@@ -166,6 +177,9 @@ int main(void)
     initGL(width,height);
     
     initGame();
+    
+    GLfloat lightpos[] = {3.0, 4.0, 3.0, 0.0};
+    glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
     
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);

@@ -71,8 +71,11 @@ void Level::drawLevel(){
     }
     
     glEnable(GL_TEXTURE_2D);
+    glEnable(GL_LIGHTING);
     glBindTexture(GL_TEXTURE_2D, texture3);
     background.drawBackGround();
+    
+    
     
     glBindTexture(GL_TEXTURE_2D, texture2);
     for (int i = 0; i<turrets.size(); i++) {
@@ -84,15 +87,18 @@ void Level::drawLevel(){
     for (int i = 0; i<bases.size(); i++) {
         Base * base = &bases[i];
         base->draw();
+        //base->drawObj(shapes, materials);
     }
     
     //draw all the elements of all the vector arrays
     glBindTexture(GL_TEXTURE_2D, texture4);
+    /*
     for (int i = 0; i<players.size(); i++) {
         Player * player = &players[i];
         player->draw();
+        //player->drawObj(shapes, materials);
     }
-    
+    */
     glBindTexture(GL_TEXTURE_2D, texture5);
     for (int i = 0; i<enemies.size(); i++) {
         Enemie * enemie = &enemies[i];
@@ -101,6 +107,14 @@ void Level::drawLevel(){
     
     glDisable(GL_TEXTURE_2D);
     
+    glEnable(GL_DEPTH_TEST);
+    for (int i = 0; i<players.size(); i++) {
+        Player * player = &players[i];
+        //player->draw();
+        player->drawObj(shapes, materials, normals);
+    }
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_LIGHTING);
     for (int i = 0; i<bullets.size(); i++) {
         Bullet *bullet = bullets[i];
         bullet->draw();
@@ -471,9 +485,11 @@ void Level::roundStart(int _round){
 
 
 void Level::loadModels(){
-    std::string inputfile = "T_34_85.obj";
-    std::vector<tinyobj::shape_t> shapes;
-    std::vector<tinyobj::material_t> materials;
+    //std::string inputfile = "t-54.obj";
+    //std::string inputfile = "hydra flak.obj";
+    std::string inputfile = "lancer tank.obj";
+    //std::string inputfile = "Su-34_Fullback.obj";
+    
     
     std::string err = tinyobj::LoadObj(shapes, materials, inputfile.c_str());
     if (!err.empty()) {
@@ -481,6 +497,10 @@ void Level::loadModels(){
         exit(1);
     }
     
+
+    //calculateNormal(shapes);
+    
+    /*
     std::cout << "# of shapes    : " << shapes.size() << std::endl;
     std::cout << "# of materials : " << materials.size() << std::endl;
     
@@ -488,9 +508,13 @@ void Level::loadModels(){
         printf("shape[%ld].name = %s\n", i, shapes[i].name.c_str());
         printf("Size of shape[%ld].indices: %ld\n", i, shapes[i].mesh.indices.size());
         printf("Size of shape[%ld].material_ids: %ld\n", i, shapes[i].mesh.material_ids.size());
+        printf("Size of shape[%ld].normals: %ld\n", i, shapes[i].mesh.normals.size());
+        
         
         for (size_t f = 0; f < shapes[i].mesh.indices.size() / 3; f++) {
             printf("  idx[%ld] = %d, %d, %d. mat_id = %d\n", f, shapes[i].mesh.indices[3*f+0], shapes[i].mesh.indices[3*f+1], shapes[i].mesh.indices[3*f+2], shapes[i].mesh.material_ids[f]);
+            
+            //printf("  idx[%ld] = %d, %d, %d. mat_id = %d\n", f, shapes[i].mesh.indices[3*f+0], shapes[i].mesh.indices[3*f+1], shapes[i].mesh.indices[3*f+2], shapes[i].mesh.material_ids[f]);
         }
         
         printf("shape[%ld].vertices: %ld\n", i, shapes[i].mesh.positions.size());
@@ -525,4 +549,70 @@ void Level::loadModels(){
         }
         printf("\n");
     }
+     */
 }
+
+
+
+void Level::calculateNormal(std::vector<tinyobj::shape_t> shapes){
+    for (size_t i = 0; i < shapes.size(); i++){
+        for (int i = 0; i+2 < shapes[i].mesh.indices.size(); i+=3){
+            float pointNormal[] = {0.0f,0.0f,0.0f};
+            normals.push_back(pointNormal[0]);
+            normals.push_back(pointNormal[1]);
+            normals.push_back(pointNormal[2]);
+        }
+    }
+    
+    for (size_t i = 0; i < shapes.size(); i++) {
+        for (size_t f = 0; f < shapes[i].mesh.indices.size() / 3; f++){
+            float vector[3], vector2[3];
+            float v1[] = { shapes[i].mesh.positions[ shapes[i].mesh.positions[i] *3 + 0], shapes[i].mesh.positions[ shapes[i].mesh.indices[i] *3 + 1],  shapes[i].mesh.positions[ shapes[i].mesh.indices[i] *3 + 2]};
+            float v2[] = {shapes[i].mesh.positions[ shapes[i].mesh.indices[i+1] *3 + 0], shapes[i].mesh.positions[ shapes[i].mesh.indices[i+1] *3 + 1],  shapes[i].mesh.positions[ shapes[i].mesh.indices[i+1] *3 + 2]};
+            float v3[] = {shapes[i].mesh.positions[ shapes[i].mesh.indices[i+2] *3 + 0], shapes[i].mesh.positions[ shapes[i].mesh.indices[i+2] *3 + 1],  shapes[i].mesh.positions[ shapes[i].mesh.indices[i+2] *3 + 2]};
+            
+            vector[0] = v3[0] - v1[0];
+            vector[1] = v3[1] - v1[1];
+            vector[2] = v3[2] - v1[2];
+            
+            vector2[0] = v2[0] - v1[0];
+            vector2[1] = v2[1] - v1[1];
+            vector2[2] = v2[2] - v1[2];
+            
+            float normal[3];
+            CrossProduct(vector,vector2, normal);
+            
+            updatePointNormal(normal, shapes[i].mesh.indices[i], (int)i);
+            updatePointNormal(normal, shapes[i].mesh.indices[i+1],(int)i);
+            updatePointNormal(normal, shapes[i].mesh.indices[i+2],(int)i);
+        }
+    }
+}
+
+void Level::CrossProduct(float *a, float *b, float *normal)
+{
+    //Cross product formula
+    normal[0] = (a[1] * b[2]) - (a[2] * b[1]);
+    normal[1] = (a[2] * b[0]) - (a[0] * b[2]);
+    normal[2] = (a[0] * b[1]) - (a[1] * b[0]);
+    
+}
+
+void Level::updatePointNormal(float *normal, int vertex, int shape){
+    float x = normals[vertex * 3];
+    float y = normals[vertex * 3 + 1];
+    float z = normals[vertex * 3 + 2];
+    float x1 = normal[0];
+    float y1 = normal[1];
+    float z1 = normal[2];
+        
+    float x2 = (x1 + x);
+    float y2 = (y1 + y);
+    float z2 = (z1 + z);
+        
+    normals[vertex*3] = x2;
+    normals[vertex*3 + 1] = y2;
+    normals[vertex*3 + 2] = z2;
+}
+
+

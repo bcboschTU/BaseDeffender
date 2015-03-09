@@ -24,6 +24,7 @@ public:
            float _angle,
            int _level);
     void draw();
+    void drawObj(std::vector<tinyobj::shape_t> shapes, std::vector<tinyobj::material_t> materials, std::vector<float> normals);
     void updatePlayer();
     void shootPrimary(float dirXPos, float dirYPos);
     void shootSecondary(float dirXPos, float dirYPos);

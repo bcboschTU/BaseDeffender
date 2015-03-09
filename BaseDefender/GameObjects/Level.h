@@ -49,6 +49,9 @@ public:
     void resetLevel();
     void loadTextures();
     void loadModels();
+    void calculateNormal(std::vector<tinyobj::shape_t> shapes);
+    void updatePointNormal(float *normal, int vertex, int shape);
+    void CrossProduct(float *a, float *b, float *normal);
     void renderString(float x, float y, void *font, const std::string &string);
     void generateExplosionBullet(float _xPos, float _yPos, WeaponType _weaponType);
     void generateExplosion(float _xPos, float _yPos, ExplosionType _explosionType);
@@ -95,6 +98,11 @@ private:
     
     int width;
     int height;
+    
+    
+    std::vector<tinyobj::shape_t> shapes;
+    std::vector<tinyobj::material_t> materials;
+    std::vector<float> normals;
     
 };
 

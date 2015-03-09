@@ -17,6 +17,12 @@
 		D3A5C04E1AA89E3C009EE171 /* tank1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3337A511AA66FE200A63E52 /* tank1.png */; };
 		D3A5C04F1AA89E3C009EE171 /* player.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3337A4F1AA66AE200A63E52 /* player.png */; };
 		D3A5C0501AA89E3C009EE171 /* background1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3337A4E1AA66A3B00A63E52 /* background1.png */; };
+		D3A5C07B1AADC7BA009EE171 /* hydra flak.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3A5C07A1AADC7B1009EE171 /* hydra flak.obj */; };
+		D3A5C07D1AADCD2F009EE171 /* T-90.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3A5C07C1AADCD25009EE171 /* T-90.obj */; };
+		D3A5C07F1AADE996009EE171 /* IS7.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3A5C07E1AADE98F009EE171 /* IS7.obj */; };
+		D3A5C0811AADEAE3009EE171 /* lancer tank.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3A5C0801AADEABB009EE171 /* lancer tank.obj */; };
+		D3A5C0831AADF2C0009EE171 /* t-54.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3A5C0821AADF2AB009EE171 /* t-54.obj */; };
+		D3A5C0851AAE143F009EE171 /* Su-34_Fullback.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = D3A5C0841AADF4E6009EE171 /* Su-34_Fullback.obj */; };
 		D3C21F9E1AA2238400ABF36D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3C21F9D1AA2238400ABF36D /* main.cpp */; };
 		D3C21FA51AA2238E00ABF36D /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C21FA41AA2238E00ABF36D /* GLUT.framework */; };
 		D3C21FA71AA2239200ABF36D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C21FA61AA2239200ABF36D /* OpenGL.framework */; };
@@ -47,6 +53,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				D3A5C0851AAE143F009EE171 /* Su-34_Fullback.obj in CopyFiles */,
+				D3A5C0831AADF2C0009EE171 /* t-54.obj in CopyFiles */,
+				D3A5C0811AADEAE3009EE171 /* lancer tank.obj in CopyFiles */,
+				D3A5C07F1AADE996009EE171 /* IS7.obj in CopyFiles */,
+				D3A5C07D1AADCD2F009EE171 /* T-90.obj in CopyFiles */,
+				D3A5C07B1AADC7BA009EE171 /* hydra flak.obj in CopyFiles */,
 				D3A5C04C1AA89E3C009EE171 /* background4.png in CopyFiles */,
 				D3A5C04D1AA89E3C009EE171 /* background2.PNG in CopyFiles */,
 				D3A5C04E1AA89E3C009EE171 /* tank1.png in CopyFiles */,
@@ -75,6 +87,12 @@
 		D3A5C0461AA89DA1009EE171 /* T_34_85.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = T_34_85.obj; path = Models/T_34_85.obj; sourceTree = "<group>"; };
 		D3A5C0471AA89DA1009EE171 /* T29.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = T29.obj; path = Models/T29.obj; sourceTree = "<group>"; };
 		D3A5C04A1AA89DF1009EE171 /* cube.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
+		D3A5C07A1AADC7B1009EE171 /* hydra flak.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = "hydra flak.obj"; sourceTree = "<group>"; };
+		D3A5C07C1AADCD25009EE171 /* T-90.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = "T-90.obj"; sourceTree = "<group>"; };
+		D3A5C07E1AADE98F009EE171 /* IS7.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = IS7.obj; sourceTree = "<group>"; };
+		D3A5C0801AADEABB009EE171 /* lancer tank.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = "lancer tank.obj"; sourceTree = "<group>"; };
+		D3A5C0821AADF2AB009EE171 /* t-54.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = "t-54.obj"; sourceTree = "<group>"; };
+		D3A5C0841AADF4E6009EE171 /* Su-34_Fullback.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Su-34_Fullback.obj"; sourceTree = "<group>"; };
 		D3C21F9A1AA2238400ABF36D /* BaseDefender */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BaseDefender; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3C21F9D1AA2238400ABF36D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D3C21FA41AA2238E00ABF36D /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -393,6 +411,12 @@
 				D3A5C04A1AA89DF1009EE171 /* cube.obj */,
 				D3A5C0461AA89DA1009EE171 /* T_34_85.obj */,
 				D3A5C0471AA89DA1009EE171 /* T29.obj */,
+				D3A5C07A1AADC7B1009EE171 /* hydra flak.obj */,
+				D3A5C07C1AADCD25009EE171 /* T-90.obj */,
+				D3A5C07E1AADE98F009EE171 /* IS7.obj */,
+				D3A5C0801AADEABB009EE171 /* lancer tank.obj */,
+				D3A5C0821AADF2AB009EE171 /* t-54.obj */,
+				D3A5C0841AADF4E6009EE171 /* Su-34_Fullback.obj */,
 			);
 			name = Models;
 			sourceTree = "<group>";

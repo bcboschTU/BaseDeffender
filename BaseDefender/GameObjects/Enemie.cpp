@@ -70,6 +70,62 @@ void Enemie::draw(){
     }
 }
 
+void Enemie::drawObj(std::vector<tinyobj::shape_t> shapes, std::vector<tinyobj::material_t> materials,std::vector<float> normals){
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glPushMatrix();
+    
+    glTranslatef(getXPos(), getYPos(), 0);
+    glRotated(getAngle()+270, 0.0, 0.0, 1.0);
+    
+    glTranslatef(-getXPos(), -getYPos(), 0);
+    
+    glTranslatef(getXPos(), getYPos(), 0);
+    
+    glScaled(0.03, 0.03, 0.03);
+    //glScaled(0.2, 0.2, 0.2);
+    
+    glBegin(GL_TRIANGLES);
+    for (size_t i = 0; i < shapes.size(); i++) {
+        for (size_t f = 0; f < shapes[i].mesh.indices.size() / 3; f++) {
+            glColor4f(1.0f, 1.0f, 1.0f,1.0f);
+            
+            glNormal3f(shapes[i].mesh.normals[3*shapes[i].mesh.indices[3*f+0]],
+                       shapes[i].mesh.normals[3*shapes[i].mesh.indices[3*f+0]+1],
+                       shapes[i].mesh.normals[3*shapes[i].mesh.indices[3*f+0]+2]);
+            glTexCoord2f(shapes[i].mesh.texcoords[2*shapes[i].mesh.indices[3*f+0]],
+                         shapes[i].mesh.texcoords[2*shapes[i].mesh.indices[3*f+0]+1]);
+            glVertex3f(shapes[i].mesh.positions[3*shapes[i].mesh.indices[3*f+0]],
+                       shapes[i].mesh.positions[3*shapes[i].mesh.indices[3*f+0]+1],
+                       shapes[i].mesh.positions[3*shapes[i].mesh.indices[3*f+0]+2]);
+            
+            
+            glNormal3f(shapes[i].mesh.normals[3*shapes[i].mesh.indices[3*f+1]],
+                       shapes[i].mesh.normals[3*shapes[i].mesh.indices[3*f+1]+1],
+                       shapes[i].mesh.normals[3*shapes[i].mesh.indices[3*f+1]+2]);
+            glTexCoord2f(shapes[i].mesh.texcoords[2*shapes[i].mesh.indices[3*f+1]],
+                         shapes[i].mesh.texcoords[2*shapes[i].mesh.indices[3*f+1]+1]);
+            glVertex3f(shapes[i].mesh.positions[3*shapes[i].mesh.indices[3*f+1]],
+                       shapes[i].mesh.positions[3*shapes[i].mesh.indices[3*f+1]+1],
+                       shapes[i].mesh.positions[3*shapes[i].mesh.indices[3*f+1]+2]);
+            
+            
+            glNormal3f(shapes[i].mesh.normals[3*shapes[i].mesh.indices[3*f+2]],
+                       shapes[i].mesh.normals[3*shapes[i].mesh.indices[3*f+2]+1],
+                       shapes[i].mesh.normals[3*shapes[i].mesh.indices[3*f+2]+2]);
+            glTexCoord2f(shapes[i].mesh.texcoords[2*shapes[i].mesh.indices[3*f+2]],
+                         shapes[i].mesh.texcoords[2*shapes[i].mesh.indices[3*f+2]+1]);
+            glVertex3f(shapes[i].mesh.positions[3*shapes[i].mesh.indices[3*f+2]],
+                       shapes[i].mesh.positions[3*shapes[i].mesh.indices[3*f+2]+1],
+                       shapes[i].mesh.positions[3*shapes[i].mesh.indices[3*f+2]+2]);
+            
+        }
+    }
+    glEnd();
+    glPopMatrix();
+}
+
+
 void Enemie::updateEnemie(){
     calculateNewPos();
     if(nextXpos == getXPos() && nextYpos == getYPos() && movementSpeed >= 0){

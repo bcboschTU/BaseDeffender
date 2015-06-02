@@ -50,14 +50,14 @@ void Level::loadLevel(){
     Turret turret12 = Turret("Turret2Base1", 100, -0.7, -0.7, 0.15, 0.15, 225, 1, 190, 260, NORMAL);
     turrets.push_back(turret12);
     
-    /*
+    
     Turret turret13 = Turret("Turret3Base1", 100, -0.7, 0.7, 0.15, 0.15, 135, 1, 100, 170, NORMAL);
     turrets.push_back(turret13);
     
     Turret turret14 = Turret("Turret4Base1", 100, 0.7, -0.7, 0.15, 0.15, 315, 1, 280, 350, NORMAL);
     turrets.push_back(turret14);
     
-    */
+    
      
     loadTextures();
     
@@ -71,7 +71,6 @@ void Level::drawLevel(){
     }
     
     glEnable(GL_TEXTURE_2D);
-    glEnable(GL_LIGHTING);
     glBindTexture(GL_TEXTURE_2D, texture3);
     background.drawBackGround();
     
@@ -92,29 +91,25 @@ void Level::drawLevel(){
     
     //draw all the elements of all the vector arrays
     glBindTexture(GL_TEXTURE_2D, texture4);
-    /*
-    for (int i = 0; i<players.size(); i++) {
-        Player * player = &players[i];
-        player->draw();
-        //player->drawObj(shapes, materials);
-    }
-    */
-    glBindTexture(GL_TEXTURE_2D, texture5);
-    for (int i = 0; i<enemies.size(); i++) {
-        Enemie * enemie = &enemies[i];
-        enemie->draw();
-    }
-    
-    glDisable(GL_TEXTURE_2D);
-    
+
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
     for (int i = 0; i<players.size(); i++) {
         Player * player = &players[i];
         //player->draw();
-        player->drawObj(shapes, materials, normals);
+        player->drawObj(shapes, materials,normals);
     }
-    glDisable(GL_DEPTH_TEST);
+    
+    glBindTexture(GL_TEXTURE_2D, texture4);
+    for (int i = 0; i<enemies.size(); i++) {
+        Enemie * enemie = &enemies[i];
+        //enemie->draw();
+        enemie->drawObj(shapes, materials,normals);
+    }
     glDisable(GL_LIGHTING);
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_TEXTURE_2D);
+    
     for (int i = 0; i<bullets.size(); i++) {
         Bullet *bullet = bullets[i];
         bullet->draw();
@@ -432,7 +427,8 @@ void Level::loadTextures(){
     texture1 = loadPng("base.png");
     texture2 = loadPng("tank_turret.png");
     texture3 = loadPng("background4.png");
-    texture4 = loadPng("player.png");
+    //texture4 = loadPng("Su-34_Fullback_P01.png");
+    texture4 = loadPng("B-2_Spirit_P01.png");
     texture5 = loadPng("tank1.png");
 }
 
@@ -474,7 +470,7 @@ void Level::setHeight(int _height){
 }
 
 void Level::roundStart(int _round){
-    int amountOfEnemy = 50;
+    int amountOfEnemy = 2;
     enemyAmount = amountOfEnemy * _round;
     int rate = (int)sqrt(_round);
     enemySpawnRate = 0.4 - (round/100)*2;
@@ -487,8 +483,10 @@ void Level::roundStart(int _round){
 void Level::loadModels(){
     //std::string inputfile = "t-54.obj";
     //std::string inputfile = "hydra flak.obj";
-    std::string inputfile = "lancer tank.obj";
+    //std::string inputfile = "lancer tank.obj";
+    //std::string inputfile = "T-90N.obj";
     //std::string inputfile = "Su-34_Fullback.obj";
+    std::string inputfile = "B-2_Spirit.obj";
     
     
     std::string err = tinyobj::LoadObj(shapes, materials, inputfile.c_str());

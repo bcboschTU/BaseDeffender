@@ -68,17 +68,29 @@ void initGL(int widthR, int heightR)
     glEnable(GL_POINT_SMOOTH);
     
     
-    
-    
     glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     // When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     
     
+
+    glShadeModel (GL_SMOOTH);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     
+    GLfloat light_ambient[] = { 0.2, 0.2, 0.2, 1.0 };
+    GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+    GLfloat light_position[] = { 0.0, 0.0, 0.8, 1.0 };
+    
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+    
+    glCullFace(GL_BACK);
+    glEnable(GL_CULL_FACE);
 
 }
 
@@ -98,7 +110,7 @@ void drawHud(){
     glMatrixMode(GL_MODELVIEW);
     //glPushMatrix();        ----Not sure if I need this
     glLoadIdentity();
-    glDisable(GL_CULL_FACE);
+    
     
     glClear(GL_DEPTH_BUFFER_BIT);
     
@@ -119,7 +131,7 @@ void drawScene(){
     glOrtho(-1, 1, -1 * (GLfloat) height / (GLfloat) width, (GLfloat) height/ (GLfloat) width, -100, 100);
     
     glScaled(camera.getPosition().z, camera.getPosition().z, 1);
-    glRotated(30, 1.0, 0, 0);
+    glRotated(-45, 1.0, 0, 0);
     //rotate += 1;
     glTranslatef(camera.getPosition().x, camera.getPosition().y, 0);
     
@@ -178,8 +190,6 @@ int main(void)
     
     initGame();
     
-    GLfloat lightpos[] = {3.0, 4.0, 3.0, 0.0};
-    glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
     
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);
